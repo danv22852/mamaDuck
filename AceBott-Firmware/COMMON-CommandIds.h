@@ -16,7 +16,6 @@ enum CommandType
     CMD_ROTATE_CCW,
     CMD_STOP,
     CMD_US_TEST,
-    CMD_SCAN_US,
 
     CMD_CLAW_OPEN,
     CMD_CLAW_CLOSE,

@@ -22,7 +22,7 @@ void MainLoop::init()
     delay(STARTUP_DELAY_MS);
 
     m_driveBase.init();
-    m_ultrasonicScanner.init(ULTRASONIC_TRIG_PIN, ULTRASONIC_ECHO_PIN, SERVO_PIN);
+    m_ultrasonicScanner.init(ULTRASONIC_TRIG_PIN, ULTRASONIC_ECHO_PIN);
     m_clawController.init(CLAW_SERVO_PIN);
 
     m_ultrasonicScanner.readDistanceMm();
@@ -30,7 +30,7 @@ void MainLoop::init()
     delay(1000);
 
     Serial.println("ESP32 ready");
-    Serial.println("Commands: PING, LED_ON, LED_OFF, BLINK, MOVE_FW, MOVE_BW, MOVE_LEFT, MOVE_RIGHT, ROTATE_CW, ROTATE_CCW, STOP, US_TEST, SCAN_US, CLAW_OPEN, CLAW_CLOSE, CLAW_SET <angle>, CLAW_STEP <delta>, CLAW_STATUS");
+    Serial.println("Commands: PING, LED_ON, LED_OFF, BLINK, MOVE_FW, MOVE_BW, MOVE_LEFT, MOVE_RIGHT, ROTATE_CW, ROTATE_CCW, STOP, US_TEST, CLAW_OPEN, CLAW_CLOSE, CLAW_SET <angle>, CLAW_STEP <delta>, CLAW_STATUS");
 }
 
 void MainLoop::tick()

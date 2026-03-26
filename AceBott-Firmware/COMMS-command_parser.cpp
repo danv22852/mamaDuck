@@ -44,7 +44,6 @@ CommandType CommandParser::parseCommandType(String cmd) const
     if (cmd == "ROTATE_CCW") return CMD_ROTATE_CCW;
     if (cmd == "STOP") return CMD_STOP;
     if (cmd == "US_TEST") return CMD_US_TEST;
-    if (cmd == "SCAN_US") return CMD_SCAN_US;
 
     if (cmd == "CLAW_OPEN") return CMD_CLAW_OPEN;
     if (cmd == "CLAW_CLOSE") return CMD_CLAW_CLOSE;
