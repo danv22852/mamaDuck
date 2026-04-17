@@ -1,0 +1,38 @@
+[
+  {
+    "ContainingType": "KnightPi.DuckDetection.Api.Controllers.DuckDetectionController",
+    "Method": "Analyze",
+    "RelativePath": "api/DuckDetection/analyze",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "File",
+        "Type": "Microsoft.AspNetCore.Http.IFormFile",
+        "IsRequired": false
+      },
+      {
+        "Name": "DetectorKind",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "SaveDebugImage",
+        "Type": "System.Boolean",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "KnightPi.DuckDetection.Abstractions.DuckDetectionResult",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  }
+]

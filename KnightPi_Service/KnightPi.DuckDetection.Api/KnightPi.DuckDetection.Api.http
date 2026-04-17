@@ -1,0 +1,6 @@
+@KnightPi.DuckDetection.Api_HostAddress = http://localhost:5184
+
+GET {{KnightPi.DuckDetection.Api_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

@@ -1,0 +1,15 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net10.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\KnightPi.DuckDetection.Abstractions\KnightPi.DuckDetection.Abstractions.csproj" />
+    <ProjectReference Include="..\KnightPi.DuckDetection.Cv\KnightPi.DuckDetection.Cv.csproj" />
+    <ProjectReference Include="..\KnightPi.DuckDetection.Ml\KnightPi.DuckDetection.Ml.csproj" />
+  </ItemGroup>
+
+</Project>

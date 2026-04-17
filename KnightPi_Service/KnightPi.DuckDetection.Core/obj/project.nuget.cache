@@ -1,0 +1,11 @@
+{
+  "version": 2,
+  "dgSpecHash": "N8jrpZ9FB6M=",
+  "success": true,
+  "projectFilePath": "C:\\Users\\danie\\Desktop\\Projects\\KnightPi_Service\\KnightPi.DuckDetection.Core\\KnightPi.DuckDetection.Core.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\danie\\.nuget\\packages\\opencvsharp4\\4.13.0.20260330\\opencvsharp4.4.13.0.20260330.nupkg.sha512",
+    "C:\\Users\\danie\\.nuget\\packages\\opencvsharp4.runtime.win\\4.13.0.20260302\\opencvsharp4.runtime.win.4.13.0.20260302.nupkg.sha512"
+  ],
+  "logs": []
+}

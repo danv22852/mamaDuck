@@ -1,0 +1,8 @@
+<Solution>
+  <Project Path="KnightPi.DuckDetection.Abstractions/KnightPi.DuckDetection.Abstractions.csproj" Id="2e2fb654-9c51-4883-ae30-3c5f18eda22a" />
+  <Project Path="KnightPi.DuckDetection.Api/KnightPi.DuckDetection.Api.csproj" Id="e4d2ed4c-77dc-4dc6-a6f4-ffb414fa435b" />
+  <Project Path="KnightPi.DuckDetection.ConsoleDemo/KnightPi.DuckDetection.ConsoleDemo.csproj" Id="49e6ab5e-df3d-40e8-9807-303780950646" />
+  <Project Path="KnightPi.DuckDetection.Core/KnightPi.DuckDetection.Core.csproj" Id="b45a65d8-ae30-49a6-b35b-a43a1cc20d72" />
+  <Project Path="KnightPi.DuckDetection.Cv/KnightPi.DuckDetection.Cv.csproj" Id="f599ebd4-be11-4ed0-a784-2389aa919866" />
+  <Project Path="KnightPi.DuckDetection.Ml/KnightPi.DuckDetection.Ml.csproj" Id="d65c7e0b-aa6d-401f-8c99-119e960fbf7a" />
+</Solution>

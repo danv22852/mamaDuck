@@ -1,0 +1,13 @@
+{
+  "version": 2,
+  "dgSpecHash": "yD9pL0T1Kzw=",
+  "success": true,
+  "projectFilePath": "C:\\Users\\danie\\Desktop\\Projects\\KnightPi_Service\\KnightPi.DuckDetection.Api\\KnightPi.DuckDetection.Api.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\danie\\.nuget\\packages\\microsoft.aspnetcore.openapi\\10.0.5\\microsoft.aspnetcore.openapi.10.0.5.nupkg.sha512",
+    "C:\\Users\\danie\\.nuget\\packages\\microsoft.openapi\\2.0.0\\microsoft.openapi.2.0.0.nupkg.sha512",
+    "C:\\Users\\danie\\.nuget\\packages\\opencvsharp4\\4.13.0.20260330\\opencvsharp4.4.13.0.20260330.nupkg.sha512",
+    "C:\\Users\\danie\\.nuget\\packages\\opencvsharp4.runtime.win\\4.13.0.20260302\\opencvsharp4.runtime.win.4.13.0.20260302.nupkg.sha512"
+  ],
+  "logs": []
+}
