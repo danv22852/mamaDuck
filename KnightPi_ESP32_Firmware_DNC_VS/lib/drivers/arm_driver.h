@@ -42,22 +42,25 @@ public:
     void setShoulderAngle(int angleDeg);
     void setElbowAngle(int angleDeg);
 
-    ArmResult movePose(
+    ArmResult movePoseBySpeed(
         const ArmPoseAngles& targetPose,
-        const ArmServoStepDelay& stepDelay,
+        const ArmServoSpeed& speedProfile,
         const ArmMotionOptions& options
     );
 
-    ArmResult moveToCartesianMm(const ArmPointMm& pointMm);
-
 private:
-    bool isWithinWorkspaceCm(float xCm, float yCm, float zCm) const;
     bool isValidServoAngle(int angleDeg) const;
+    int sanitizeSpeedPercent(int speedPercent) const;
+    int getServoSpeedPercent(const ArmServoSpeed& speedProfile, ArmServoId servoId) const;
     void writeServoAngle(ArmServoId servoId, int angleDeg);
-    int getLastServoAngle(ArmServoId servoId) const;
     int getTargetServoAngle(const ArmPoseAngles& pose, ArmServoId servoId) const;
     bool poseUsesServo(const ArmPoseAngles& pose, ArmServoId servoId) const;
-    void moveServoSlow(ArmServoId servoId, int targetAngleDeg, unsigned long stepDelayMs);
+
+    ArmResult movePoseDirect(
+        const ArmPoseAngles& targetPose,
+        const ArmServoSpeed& speedProfile,
+        const ArmMotionOptions& options
+    );
 };
 
 #endif

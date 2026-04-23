@@ -2,6 +2,7 @@
 #define TYPES_H
 
 #include <Arduino.h>
+#include <string.h>
 #include "command_ids.h"
 #include "config.h"
 
@@ -45,6 +46,24 @@ struct ArmServoStepDelay
     }
 };
 
+struct ArmServoSpeed
+{
+    int chassisPercent;
+    int shoulderPercent;
+    int elbowPercent;
+    int wristPercent;
+    int clawPercent;
+
+    ArmServoSpeed()
+        : chassisPercent(50),
+          shoulderPercent(50),
+          elbowPercent(50),
+          wristPercent(50),
+          clawPercent(50)
+    {
+    }
+};
+
 struct ArmPoseAngles
 {
     bool useChassis;
@@ -84,24 +103,33 @@ struct ArmMotionOptions
         : mode(ARM_MOTION_ORDERED),
           servoOrderCount(0)
     {
+        servoOrder[0] = ARM_SERVO_CHASSIS;
+        servoOrder[1] = ARM_SERVO_SHOULDER;
+        servoOrder[2] = ARM_SERVO_ELBOW;
+        servoOrder[3] = ARM_SERVO_WRIST;
+        servoOrder[4] = ARM_SERVO_CLAW;
     }
 };
 
 struct Command
 {
     CommandType type;
-    String originalText;
-
-    // command envelope
-    String transactionId;
     bool expectsJsonResponse;
+    char transactionId[64];
 
-    // existing cartesian arm command
-    float pickAngleDeg;
-    float pickDistanceMm;
-    float pickHeightMm;
+    CancelTarget cancelTarget;
 
-    // PICK_ANGLES - pickup pose
+    int moveAmountMs;
+    int moveSpeed;
+
+    float usScanAngleDeg;
+    int usScanSteps;
+    unsigned long usScanStepRotateMs;
+    int usScanRotateSpeed;
+    ScanRotation usScanRotation;
+
+    float usMonitorAlarmDistanceMm;
+
     float armPickupChassisAngleDeg;
     float armPickupShoulderAngleDeg;
     float armPickupElbowAngleDeg;
@@ -109,14 +137,13 @@ struct Command
     float armOpenClawAngleDeg;
     float armCloseClawAngleDeg;
 
-    // PICK_ANGLES - lift pose
     float armLiftChassisAngleDeg;
     float armLiftShoulderAngleDeg;
     float armLiftElbowAngleDeg;
     float armLiftWristAngleDeg;
 
-    // PICK_ANGLES - motion
-    ArmServoStepDelay armStepDelay;
+    ArmServoSpeed armPickupSpeed;
+    ArmServoSpeed armLiftSpeed;
 
     ArmMotionMode armPickupMotionMode;
     int armPickupServoOrderCount;
@@ -126,20 +153,20 @@ struct Command
     int armLiftServoOrderCount;
     ArmServoId armLiftServoOrder[ARM_SERVO_COUNT];
 
-    // DROP_ANGLES - drop pose
     float armDropChassisAngleDeg;
     float armDropShoulderAngleDeg;
     float armDropElbowAngleDeg;
     float armDropWristAngleDeg;
     float armDropOpenClawAngleDeg;
 
-    // DROP_ANGLES - retreat pose
     float armRetreatChassisAngleDeg;
     float armRetreatShoulderAngleDeg;
     float armRetreatElbowAngleDeg;
     float armRetreatWristAngleDeg;
 
-    // DROP_ANGLES - motion
+    ArmServoSpeed armDropSpeed;
+    ArmServoSpeed armRetreatSpeed;
+
     ArmMotionMode armDropMotionMode;
     int armDropServoOrderCount;
     ArmServoId armDropServoOrder[ARM_SERVO_COUNT];
@@ -148,90 +175,67 @@ struct Command
     int armRetreatServoOrderCount;
     ArmServoId armRetreatServoOrder[ARM_SERVO_COUNT];
 
-    // MOVE_ARM_ANGLES - pose
     float armMoveChassisAngleDeg;
     float armMoveShoulderAngleDeg;
     float armMoveElbowAngleDeg;
     float armMoveWristAngleDeg;
     float armMoveClawAngleDeg;
 
-    // MOVE_ARM_ANGLES - motion
+    ArmServoSpeed armMoveSpeed;
+
     ArmMotionMode armMoveMotionMode;
     int armMoveServoOrderCount;
     ArmServoId armMoveServoOrder[ARM_SERVO_COUNT];
 
-    // move commands
-    int moveAmountMs;
-    int moveSpeed;
-
-    // robot rotation ultrasonic scan
-    float usScanAngleDeg;
-    int usScanSteps;
-    unsigned long usScanStepRotateMs;
-    int usScanRotateSpeed;
-    ScanRotation usScanRotation;
-
     Command()
         : type(CMD_UNKNOWN),
-          originalText(""),
-          transactionId(""),
           expectsJsonResponse(false),
-
-          pickAngleDeg(0.0f),
-          pickDistanceMm(0.0f),
-          pickHeightMm(0.0f),
-
+          cancelTarget(CANCEL_TARGET_ALL),
+          moveAmountMs(0),
+          moveSpeed(50),
+          usScanAngleDeg(0.0f),
+          usScanSteps(0),
+          usScanStepRotateMs(DEFAULT_US_SCAN_STEP_ROTATE_MS),
+          usScanRotateSpeed(DEFAULT_US_SCAN_ROTATE_SPEED),
+          usScanRotation(SCAN_CCW),
+          usMonitorAlarmDistanceMm(DEFAULT_US_MONITOR_ALARM_DISTANCE_MM),
           armPickupChassisAngleDeg(0.0f),
           armPickupShoulderAngleDeg(0.0f),
           armPickupElbowAngleDeg(0.0f),
           armPickupWristAngleDeg(0.0f),
           armOpenClawAngleDeg(0.0f),
           armCloseClawAngleDeg(0.0f),
-
           armLiftChassisAngleDeg(0.0f),
           armLiftShoulderAngleDeg(0.0f),
           armLiftElbowAngleDeg(0.0f),
           armLiftWristAngleDeg(0.0f),
-
           armPickupMotionMode(ARM_MOTION_ORDERED),
           armPickupServoOrderCount(0),
           armLiftMotionMode(ARM_MOTION_ORDERED),
           armLiftServoOrderCount(0),
-
           armDropChassisAngleDeg(0.0f),
           armDropShoulderAngleDeg(0.0f),
           armDropElbowAngleDeg(0.0f),
           armDropWristAngleDeg(0.0f),
           armDropOpenClawAngleDeg(0.0f),
-
           armRetreatChassisAngleDeg(0.0f),
           armRetreatShoulderAngleDeg(0.0f),
           armRetreatElbowAngleDeg(0.0f),
           armRetreatWristAngleDeg(0.0f),
-
           armDropMotionMode(ARM_MOTION_ORDERED),
           armDropServoOrderCount(0),
           armRetreatMotionMode(ARM_MOTION_ORDERED),
           armRetreatServoOrderCount(0),
-
           armMoveChassisAngleDeg(0.0f),
           armMoveShoulderAngleDeg(0.0f),
           armMoveElbowAngleDeg(0.0f),
           armMoveWristAngleDeg(0.0f),
           armMoveClawAngleDeg(0.0f),
-
           armMoveMotionMode(ARM_MOTION_ORDERED),
-          armMoveServoOrderCount(0),
-
-          moveAmountMs(0),
-          moveSpeed(50),
-
-          usScanAngleDeg(0.0f),
-          usScanSteps(0),
-          usScanStepRotateMs(DEFAULT_US_SCAN_STEP_ROTATE_MS),
-          usScanRotateSpeed(DEFAULT_US_SCAN_ROTATE_SPEED),
-          usScanRotation(SCAN_CCW)
+          armMoveServoOrderCount(0)
     {
+        transactionId[0] = '\0';
+
         armPickupServoOrder[0] = ARM_SERVO_CLAW;
         armPickupServoOrder[1] = ARM_SERVO_CHASSIS;
         armPickupServoOrder[2] = ARM_SERVO_SHOULDER;
@@ -264,13 +268,6 @@ struct Command
     }
 };
 
-struct ScanResult
-{
-    float leftMm;
-    float centerMm;
-    float rightMm;
-};
-
 constexpr int MAX_US_SCAN_POINTS = 72;
 
 struct UltrasonicScanPoint
@@ -290,39 +287,13 @@ struct UltrasonicSweepResult
     }
 };
 
-struct ErrorInfo
-{
-    String code;
-    String message;
-};
-
-struct JsonResponseContext
-{
-    String transactionId;
-    String command;
-    bool ok;
-
-    JsonResponseContext()
-        : transactionId(""),
-          command(""),
-          ok(true)
-    {
-    }
-};
-
-struct ArmPointMm
-{
-    float xMm;
-    float yMm;
-    float zMm;
-};
-
 enum ArmResult
 {
     ARM_RESULT_OK = 0,
     ARM_RESULT_NOT_INITIALIZED,
     ARM_RESULT_INVALID_ARGUMENT,
-    ARM_RESULT_OUT_OF_REACH
+    ARM_RESULT_BUSY,
+    ARM_RESULT_CANCELLED
 };
 
 struct ArmPickResult
@@ -349,6 +320,47 @@ struct ArmDropResult
         : result(ARM_RESULT_OK),
           dropped(false),
           retreatedToSafePose(false)
+    {
+    }
+};
+
+struct RuntimeSnapshot
+{
+    bool driveActive;
+    bool armActive;
+    bool ultrasonicSweepActive;
+
+    bool ultrasonicMonitorEnabled;
+    bool ultrasonicMonitorPausedForSweep;
+    bool ultrasonicObstacleActive;
+
+    bool cancelDriveRequested;
+    bool cancelArmRequested;
+
+    float latestDistanceMm;
+    float ultrasonicAlarmDistanceMm;
+    float ultrasonicObstacleDistanceMm;
+
+    unsigned long ultrasonicAlarmSequence;
+
+    CommandType driveCommand;
+    CommandType armCommand;
+
+    RuntimeSnapshot()
+        : driveActive(false),
+          armActive(false),
+          ultrasonicSweepActive(false),
+          ultrasonicMonitorEnabled(false),
+          ultrasonicMonitorPausedForSweep(false),
+          ultrasonicObstacleActive(false),
+          cancelDriveRequested(false),
+          cancelArmRequested(false),
+          latestDistanceMm(0.0f),
+          ultrasonicAlarmDistanceMm(DEFAULT_US_MONITOR_ALARM_DISTANCE_MM),
+          ultrasonicObstacleDistanceMm(0.0f),
+          ultrasonicAlarmSequence(0),
+          driveCommand(CMD_UNKNOWN),
+          armCommand(CMD_UNKNOWN)
     {
     }
 };

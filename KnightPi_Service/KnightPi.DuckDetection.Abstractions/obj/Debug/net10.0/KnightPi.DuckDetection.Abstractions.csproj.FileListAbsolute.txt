@@ -9,14 +9,3 @@ C:\Users\admin\Desktop\Projects\DNC-KnightPi-Service\KnightPi-Service\KnightPi.D
 C:\Users\admin\Desktop\Projects\DNC-KnightPi-Service\KnightPi-Service\KnightPi.DuckDetection.Abstractions\obj\Debug\net10.0\refint\KnightPi.DuckDetection.Abstractions.dll
 C:\Users\admin\Desktop\Projects\DNC-KnightPi-Service\KnightPi-Service\KnightPi.DuckDetection.Abstractions\obj\Debug\net10.0\KnightPi.DuckDetection.Abstractions.pdb
 C:\Users\admin\Desktop\Projects\DNC-KnightPi-Service\KnightPi-Service\KnightPi.DuckDetection.Abstractions\obj\Debug\net10.0\ref\KnightPi.DuckDetection.Abstractions.dll
-C:\Users\danie\Desktop\Projects\KnightPi_Service\KnightPi.DuckDetection.Abstractions\bin\Debug\net10.0\KnightPi.DuckDetection.Abstractions.deps.json
-C:\Users\danie\Desktop\Projects\KnightPi_Service\KnightPi.DuckDetection.Abstractions\bin\Debug\net10.0\KnightPi.DuckDetection.Abstractions.dll
-C:\Users\danie\Desktop\Projects\KnightPi_Service\KnightPi.DuckDetection.Abstractions\bin\Debug\net10.0\KnightPi.DuckDetection.Abstractions.pdb
-C:\Users\danie\Desktop\Projects\KnightPi_Service\KnightPi.DuckDetection.Abstractions\obj\Debug\net10.0\KnightPi.DuckDetection.Abstractions.GeneratedMSBuildEditorConfig.editorconfig
-C:\Users\danie\Desktop\Projects\KnightPi_Service\KnightPi.DuckDetection.Abstractions\obj\Debug\net10.0\KnightPi.DuckDetection.Abstractions.AssemblyInfoInputs.cache
-C:\Users\danie\Desktop\Projects\KnightPi_Service\KnightPi.DuckDetection.Abstractions\obj\Debug\net10.0\KnightPi.DuckDetection.Abstractions.AssemblyInfo.cs
-C:\Users\danie\Desktop\Projects\KnightPi_Service\KnightPi.DuckDetection.Abstractions\obj\Debug\net10.0\KnightPi.DuckDetection.Abstractions.csproj.CoreCompileInputs.cache
-C:\Users\danie\Desktop\Projects\KnightPi_Service\KnightPi.DuckDetection.Abstractions\obj\Debug\net10.0\KnightPi.DuckDetection.Abstractions.dll
-C:\Users\danie\Desktop\Projects\KnightPi_Service\KnightPi.DuckDetection.Abstractions\obj\Debug\net10.0\refint\KnightPi.DuckDetection.Abstractions.dll
-C:\Users\danie\Desktop\Projects\KnightPi_Service\KnightPi.DuckDetection.Abstractions\obj\Debug\net10.0\KnightPi.DuckDetection.Abstractions.pdb
-C:\Users\danie\Desktop\Projects\KnightPi_Service\KnightPi.DuckDetection.Abstractions\obj\Debug\net10.0\ref\KnightPi.DuckDetection.Abstractions.dll

@@ -1,5 +1,6 @@
 #include "arm_driver.h"
-#include <math.h>
+#include "../common/runtime_state.h"
+#include "../common/config.h"
 
 ArmDriver::ArmDriver()
     : m_initialized(false),
@@ -26,15 +27,8 @@ void ArmDriver::init(
     m_arm.Chassis_angle_adjust(chassisAngleAdjustDeg);
     m_arm.Slight_adjust(slightAdjustPositiveXDeg, slightAdjustNegativeXDeg);
 
-    m_arm.ARM_init(
-        chassisPin,
-        shoulderPin,
-        elbowPin,
-        wristPin,
-        clawPin
-    );
-
-    m_arm.Speed(speedPercent);
+    m_arm.ARM_init(chassisPin, shoulderPin, elbowPin, wristPin, clawPin);
+    m_arm.Speed(sanitizeSpeedPercent(speedPercent));
 
     m_initialized = true;
 }
@@ -53,7 +47,7 @@ void ArmDriver::home()
 void ArmDriver::setSpeed(int speedPercent)
 {
     if (!m_initialized) return;
-    m_arm.Speed(speedPercent);
+    m_arm.Speed(sanitizeSpeedPercent(speedPercent));
 }
 
 void ArmDriver::setWristAngle(int angleDeg)
@@ -96,6 +90,26 @@ bool ArmDriver::isValidServoAngle(int angleDeg) const
     return angleDeg >= 0 && angleDeg <= 180;
 }
 
+int ArmDriver::sanitizeSpeedPercent(int speedPercent) const
+{
+    if (speedPercent < 0) return 0;
+    if (speedPercent > 100) return 100;
+    return speedPercent;
+}
+
+int ArmDriver::getServoSpeedPercent(const ArmServoSpeed& speedProfile, ArmServoId servoId) const
+{
+    switch (servoId)
+    {
+        case ARM_SERVO_CHASSIS: return sanitizeSpeedPercent(speedProfile.chassisPercent);
+        case ARM_SERVO_SHOULDER: return sanitizeSpeedPercent(speedProfile.shoulderPercent);
+        case ARM_SERVO_ELBOW: return sanitizeSpeedPercent(speedProfile.elbowPercent);
+        case ARM_SERVO_WRIST: return sanitizeSpeedPercent(speedProfile.wristPercent);
+        case ARM_SERVO_CLAW: return sanitizeSpeedPercent(speedProfile.clawPercent);
+        default: return 50;
+    }
+}
+
 void ArmDriver::writeServoAngle(ArmServoId servoId, int angleDeg)
 {
     switch (servoId)
@@ -106,19 +120,6 @@ void ArmDriver::writeServoAngle(ArmServoId servoId, int angleDeg)
         case ARM_SERVO_WRIST: setWristAngle(angleDeg); break;
         case ARM_SERVO_CLAW: setClawAngle(angleDeg); break;
         default: break;
-    }
-}
-
-int ArmDriver::getLastServoAngle(ArmServoId servoId) const
-{
-    switch (servoId)
-    {
-        case ARM_SERVO_CHASSIS: return m_lastChassisAngleDeg;
-        case ARM_SERVO_SHOULDER: return m_lastShoulderAngleDeg;
-        case ARM_SERVO_ELBOW: return m_lastElbowAngleDeg;
-        case ARM_SERVO_WRIST: return m_lastWristAngleDeg;
-        case ARM_SERVO_CLAW: return m_lastClawAngleDeg;
-        default: return 0;
     }
 }
 
@@ -148,31 +149,9 @@ bool ArmDriver::poseUsesServo(const ArmPoseAngles& pose, ArmServoId servoId) con
     }
 }
 
-void ArmDriver::moveServoSlow(ArmServoId servoId, int targetAngleDeg, unsigned long stepDelayMs)
-{
-    int currentAngleDeg = getLastServoAngle(servoId);
-
-    if (targetAngleDeg > currentAngleDeg)
-    {
-        for (int angle = currentAngleDeg; angle <= targetAngleDeg; angle++)
-        {
-            writeServoAngle(servoId, angle);
-            delay(stepDelayMs);
-        }
-    }
-    else
-    {
-        for (int angle = currentAngleDeg; angle >= targetAngleDeg; angle--)
-        {
-            writeServoAngle(servoId, angle);
-            delay(stepDelayMs);
-        }
-    }
-}
-
-ArmResult ArmDriver::movePose(
+ArmResult ArmDriver::movePoseDirect(
     const ArmPoseAngles& targetPose,
-    const ArmServoStepDelay& stepDelay,
+    const ArmServoSpeed& speedProfile,
     const ArmMotionOptions& options
 )
 {
@@ -182,112 +161,85 @@ ArmResult ArmDriver::movePose(
     {
         ArmServoId servoId = (ArmServoId)i;
 
-        if (!poseUsesServo(targetPose, servoId)) continue;
+        if (!poseUsesServo(targetPose, servoId))
+        {
+            continue;
+        }
 
         int targetDeg = getTargetServoAngle(targetPose, servoId);
-        if (!isValidServoAngle(targetDeg)) return ARM_RESULT_INVALID_ARGUMENT;
+        if (!isValidServoAngle(targetDeg))
+        {
+            return ARM_RESULT_INVALID_ARGUMENT;
+        }
     }
+
+    if (RuntimeState::instance().shouldCancelArm())
+    {
+        return ARM_RESULT_CANCELLED;
+    }
+
+    int previousSpeed = sanitizeSpeedPercent(m_arm.speed);
+    int orderCount = options.servoOrderCount > 0 ? options.servoOrderCount : ARM_SERVO_COUNT;
+    ArmResult finalResult = ARM_RESULT_OK;
 
     if (options.mode == ARM_MOTION_ORDERED)
     {
-        for (int i = 0; i < options.servoOrderCount; i++)
+        for (int i = 0; i < orderCount; i++)
         {
-            ArmServoId servoId = options.servoOrder[i];
-            if (!poseUsesServo(targetPose, servoId)) continue;
-
-            unsigned long delayMs = 15;
-            if (servoId == ARM_SERVO_CHASSIS) delayMs = stepDelay.chassisMs;
-            else if (servoId == ARM_SERVO_SHOULDER) delayMs = stepDelay.shoulderMs;
-            else if (servoId == ARM_SERVO_ELBOW) delayMs = stepDelay.elbowMs;
-            else if (servoId == ARM_SERVO_WRIST) delayMs = stepDelay.wristMs;
-            else if (servoId == ARM_SERVO_CLAW) delayMs = stepDelay.clawMs;
-
-            moveServoSlow(servoId, getTargetServoAngle(targetPose, servoId), delayMs);
-        }
-
-        return ARM_RESULT_OK;
-    }
-
-    int current[ARM_SERVO_COUNT];
-    int target[ARM_SERVO_COUNT];
-    unsigned long delayMs[ARM_SERVO_COUNT];
-    unsigned long lastStepAt[ARM_SERVO_COUNT];
-    bool active[ARM_SERVO_COUNT];
-
-    for (int i = 0; i < ARM_SERVO_COUNT; i++)
-    {
-        ArmServoId servoId = (ArmServoId)i;
-        current[i] = getLastServoAngle(servoId);
-        target[i] = getTargetServoAngle(targetPose, servoId);
-        lastStepAt[i] = 0;
-        active[i] = poseUsesServo(targetPose, servoId) && current[i] != target[i];
-
-        if (servoId == ARM_SERVO_CHASSIS) delayMs[i] = stepDelay.chassisMs;
-        else if (servoId == ARM_SERVO_SHOULDER) delayMs[i] = stepDelay.shoulderMs;
-        else if (servoId == ARM_SERVO_ELBOW) delayMs[i] = stepDelay.elbowMs;
-        else if (servoId == ARM_SERVO_WRIST) delayMs[i] = stepDelay.wristMs;
-        else delayMs[i] = stepDelay.clawMs;
-    }
-
-    bool anyActive = true;
-
-    while (anyActive)
-    {
-        anyActive = false;
-        unsigned long now = millis();
-
-        for (int i = 0; i < ARM_SERVO_COUNT; i++)
-        {
-            if (!active[i]) continue;
-            anyActive = true;
-
-            if (lastStepAt[i] == 0 || (now - lastStepAt[i]) >= delayMs[i])
+            if (RuntimeState::instance().shouldCancelArm())
             {
-                if (current[i] < target[i]) current[i]++;
-                else if (current[i] > target[i]) current[i]--;
-
-                writeServoAngle((ArmServoId)i, current[i]);
-                lastStepAt[i] = now;
-
-                if (current[i] == target[i])
-                {
-                    active[i] = false;
-                }
+                finalResult = ARM_RESULT_CANCELLED;
+                break;
             }
-        }
 
-        delay(1);
+            ArmServoId servoId =
+                options.servoOrderCount > 0 ? options.servoOrder[i] : (ArmServoId)i;
+
+            if (!poseUsesServo(targetPose, servoId))
+            {
+                continue;
+            }
+
+            int servoSpeed = getServoSpeedPercent(speedProfile, servoId);
+            m_arm.Speed(servoSpeed);
+            writeServoAngle(servoId, getTargetServoAngle(targetPose, servoId));
+
+            vTaskDelay(pdMS_TO_TICKS(20));
+        }
+    }
+    else
+    {
+        for (int i = 0; i < orderCount; i++)
+        {
+            if (RuntimeState::instance().shouldCancelArm())
+            {
+                finalResult = ARM_RESULT_CANCELLED;
+                break;
+            }
+
+            ArmServoId servoId =
+                options.servoOrderCount > 0 ? options.servoOrder[i] : (ArmServoId)i;
+
+            if (!poseUsesServo(targetPose, servoId))
+            {
+                continue;
+            }
+
+            int servoSpeed = getServoSpeedPercent(speedProfile, servoId);
+            m_arm.Speed(servoSpeed);
+            writeServoAngle(servoId, getTargetServoAngle(targetPose, servoId));
+        }
     }
 
-    return ARM_RESULT_OK;
+    m_arm.Speed(previousSpeed);
+    return finalResult;
 }
 
-ArmResult ArmDriver::moveToCartesianMm(const ArmPointMm& pointMm)
+ArmResult ArmDriver::movePoseBySpeed(
+    const ArmPoseAngles& targetPose,
+    const ArmServoSpeed& speedProfile,
+    const ArmMotionOptions& options
+)
 {
-    if (!m_initialized) return ARM_RESULT_NOT_INITIALIZED;
-    
-    float xCm = pointMm.xMm / 10.0f;
-    float yCm = pointMm.yMm / 10.0f;
-    float zCm = pointMm.zMm / 10.0f;
-
-    float dzCm = zCm - 11.0f;
-    float sphereDistance = sqrtf(xCm * xCm + yCm * yCm + dzCm * dzCm);
-
-    Serial.printf("MOVE ARM to X=%.2fcm Y=%.2fcm Z=%.2fcm\n", xCm, yCm, zCm);
-    Serial.printf("SPHERE DIST from (0,0,11) = %.2fcm\n", sphereDistance);
-
-    if (!isWithinWorkspaceCm(xCm, yCm, zCm)) return ARM_RESULT_OUT_OF_REACH;
-
-    m_arm.PtpCmd(
-        (int)roundf(xCm),
-        (int)roundf(yCm),
-        (int)roundf(zCm)
-    );
-
-    return ARM_RESULT_OK;
-}
-
-bool ArmDriver::isWithinWorkspaceCm(float xCm, float yCm, float zCm) const
-{
-    return true;
+    return movePoseDirect(targetPose, speedProfile, options);
 }

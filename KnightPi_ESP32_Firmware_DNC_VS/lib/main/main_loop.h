@@ -17,11 +17,13 @@ public:
     void tick();
 
 private:
+    static void serialTaskEntry(void* param);
+    void serialTaskLoop();
     void handleSerialInput();
 
 private:
     String m_inputBuffer;
-    
+
     DriveBase m_driveBase;
     UltrasonicScanner m_ultrasonicScanner;
     RoboticArm m_roboticArm;

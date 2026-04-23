@@ -5,15 +5,10 @@ enum CommandType
 {
     CMD_UNKNOWN = 0,
 
-    // ESP32 System
     CMD_PING,
+    CMD_STATUS,
+    CMD_CANCEL,
 
-    // LED
-    CMD_LED_ON,
-    CMD_LED_OFF,
-    CMD_BLINK,
-
-    // Motor Drive
     CMD_MOVE_FW,
     CMD_MOVE_BW,
     CMD_MOVE_LEFT,
@@ -22,15 +17,20 @@ enum CommandType
     CMD_ROTATE_CCW,
     CMD_STOP,
 
-    // Ultrasonic Sensor
-    CMD_US_TEST,
     CMD_US_SCAN,
+    CMD_US_MONITOR_ON,
+    CMD_US_MONITOR_OFF,
 
-    // Robotic Arm
-    CMD_PICK_OBJECT,
-    CMD_PICK_ANGLES,
-    CMD_DROP_ANGLES,
-    CMD_MOVE_ARM_ANGLES
+    CMD_PICK_ANGLES_SPEED,
+    CMD_DROP_ANGLES_SPEED,
+    CMD_MOVE_ARM_ANGLES_SPEED
+};
+
+enum CancelTarget
+{
+    CANCEL_TARGET_ALL = 0,
+    CANCEL_TARGET_DRIVE,
+    CANCEL_TARGET_ARM
 };
 
 #endif

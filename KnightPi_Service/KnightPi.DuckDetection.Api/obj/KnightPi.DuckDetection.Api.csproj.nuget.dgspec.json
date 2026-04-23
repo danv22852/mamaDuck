@@ -1,23 +1,23 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\danie\\Desktop\\Projects\\KnightPi_Service\\KnightPi.DuckDetection.Api\\KnightPi.DuckDetection.Api.csproj": {}
+    "C:\\Users\\admin\\Desktop\\Projects\\DNC-KnightPi-Service\\KnightPi-Service\\KnightPi.DuckDetection.Api\\KnightPi.DuckDetection.Api.csproj": {}
   },
   "projects": {
-    "C:\\Users\\danie\\Desktop\\Projects\\KnightPi_Service\\KnightPi.DuckDetection.Abstractions\\KnightPi.DuckDetection.Abstractions.csproj": {
+    "C:\\Users\\admin\\Desktop\\Projects\\DNC-KnightPi-Service\\KnightPi-Service\\KnightPi.DuckDetection.Abstractions\\KnightPi.DuckDetection.Abstractions.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\danie\\Desktop\\Projects\\KnightPi_Service\\KnightPi.DuckDetection.Abstractions\\KnightPi.DuckDetection.Abstractions.csproj",
+        "projectUniqueName": "C:\\Users\\admin\\Desktop\\Projects\\DNC-KnightPi-Service\\KnightPi-Service\\KnightPi.DuckDetection.Abstractions\\KnightPi.DuckDetection.Abstractions.csproj",
         "projectName": "KnightPi.DuckDetection.Abstractions",
-        "projectPath": "C:\\Users\\danie\\Desktop\\Projects\\KnightPi_Service\\KnightPi.DuckDetection.Abstractions\\KnightPi.DuckDetection.Abstractions.csproj",
-        "packagesPath": "C:\\Users\\danie\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\danie\\Desktop\\Projects\\KnightPi_Service\\KnightPi.DuckDetection.Abstractions\\obj\\",
+        "projectPath": "C:\\Users\\admin\\Desktop\\Projects\\DNC-KnightPi-Service\\KnightPi-Service\\KnightPi.DuckDetection.Abstractions\\KnightPi.DuckDetection.Abstractions.csproj",
+        "packagesPath": "C:\\Users\\admin\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\admin\\Desktop\\Projects\\DNC-KnightPi-Service\\KnightPi-Service\\KnightPi.DuckDetection.Abstractions\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-          "C:\\Users\\danie\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\admin\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
@@ -31,7 +31,6 @@
         },
         "frameworks": {
           "net10.0": {
-            "framework": "net10.0",
             "targetAlias": "net10.0",
             "projectReferences": {}
           }
@@ -50,7 +49,6 @@
       },
       "frameworks": {
         "net10.0": {
-          "framework": "net10.0",
           "targetAlias": "net10.0",
           "imports": [
             "net461",
@@ -68,7 +66,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\10.0.201/PortableRuntimeIdentifierGraph.json",
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\10.0.202/PortableRuntimeIdentifierGraph.json",
           "packagesToPrune": {
             "Microsoft.CSharp": "(,4.7.32767]",
             "Microsoft.VisualBasic": "(,10.4.32767]",
@@ -346,20 +344,20 @@
         }
       }
     },
-    "C:\\Users\\danie\\Desktop\\Projects\\KnightPi_Service\\KnightPi.DuckDetection.Api\\KnightPi.DuckDetection.Api.csproj": {
+    "C:\\Users\\admin\\Desktop\\Projects\\DNC-KnightPi-Service\\KnightPi-Service\\KnightPi.DuckDetection.Api\\KnightPi.DuckDetection.Api.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\danie\\Desktop\\Projects\\KnightPi_Service\\KnightPi.DuckDetection.Api\\KnightPi.DuckDetection.Api.csproj",
+        "projectUniqueName": "C:\\Users\\admin\\Desktop\\Projects\\DNC-KnightPi-Service\\KnightPi-Service\\KnightPi.DuckDetection.Api\\KnightPi.DuckDetection.Api.csproj",
         "projectName": "KnightPi.DuckDetection.Api",
-        "projectPath": "C:\\Users\\danie\\Desktop\\Projects\\KnightPi_Service\\KnightPi.DuckDetection.Api\\KnightPi.DuckDetection.Api.csproj",
-        "packagesPath": "C:\\Users\\danie\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\danie\\Desktop\\Projects\\KnightPi_Service\\KnightPi.DuckDetection.Api\\obj\\",
+        "projectPath": "C:\\Users\\admin\\Desktop\\Projects\\DNC-KnightPi-Service\\KnightPi-Service\\KnightPi.DuckDetection.Api\\KnightPi.DuckDetection.Api.csproj",
+        "packagesPath": "C:\\Users\\admin\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\admin\\Desktop\\Projects\\DNC-KnightPi-Service\\KnightPi-Service\\KnightPi.DuckDetection.Api\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-          "C:\\Users\\danie\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\admin\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
@@ -373,14 +371,13 @@
         },
         "frameworks": {
           "net10.0": {
-            "framework": "net10.0",
             "targetAlias": "net10.0",
             "projectReferences": {
-              "C:\\Users\\danie\\Desktop\\Projects\\KnightPi_Service\\KnightPi.DuckDetection.Abstractions\\KnightPi.DuckDetection.Abstractions.csproj": {
-                "projectPath": "C:\\Users\\danie\\Desktop\\Projects\\KnightPi_Service\\KnightPi.DuckDetection.Abstractions\\KnightPi.DuckDetection.Abstractions.csproj"
+              "C:\\Users\\admin\\Desktop\\Projects\\DNC-KnightPi-Service\\KnightPi-Service\\KnightPi.DuckDetection.Abstractions\\KnightPi.DuckDetection.Abstractions.csproj": {
+                "projectPath": "C:\\Users\\admin\\Desktop\\Projects\\DNC-KnightPi-Service\\KnightPi-Service\\KnightPi.DuckDetection.Abstractions\\KnightPi.DuckDetection.Abstractions.csproj"
               },
-              "C:\\Users\\danie\\Desktop\\Projects\\KnightPi_Service\\KnightPi.DuckDetection.Core\\KnightPi.DuckDetection.Core.csproj": {
-                "projectPath": "C:\\Users\\danie\\Desktop\\Projects\\KnightPi_Service\\KnightPi.DuckDetection.Core\\KnightPi.DuckDetection.Core.csproj"
+              "C:\\Users\\admin\\Desktop\\Projects\\DNC-KnightPi-Service\\KnightPi-Service\\KnightPi.DuckDetection.Core\\KnightPi.DuckDetection.Core.csproj": {
+                "projectPath": "C:\\Users\\admin\\Desktop\\Projects\\DNC-KnightPi-Service\\KnightPi-Service\\KnightPi.DuckDetection.Core\\KnightPi.DuckDetection.Core.csproj"
               }
             }
           }
@@ -399,7 +396,6 @@
       },
       "frameworks": {
         "net10.0": {
-          "framework": "net10.0",
           "targetAlias": "net10.0",
           "dependencies": {
             "Microsoft.AspNetCore.OpenApi": {
@@ -426,7 +422,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\10.0.201/PortableRuntimeIdentifierGraph.json",
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\10.0.202/PortableRuntimeIdentifierGraph.json",
           "packagesToPrune": {
             "Microsoft.AspNetCore": "(,10.0.32767]",
             "Microsoft.AspNetCore.Antiforgery": "(,10.0.32767]",
@@ -844,20 +840,20 @@
         }
       }
     },
-    "C:\\Users\\danie\\Desktop\\Projects\\KnightPi_Service\\KnightPi.DuckDetection.Core\\KnightPi.DuckDetection.Core.csproj": {
+    "C:\\Users\\admin\\Desktop\\Projects\\DNC-KnightPi-Service\\KnightPi-Service\\KnightPi.DuckDetection.Core\\KnightPi.DuckDetection.Core.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\danie\\Desktop\\Projects\\KnightPi_Service\\KnightPi.DuckDetection.Core\\KnightPi.DuckDetection.Core.csproj",
+        "projectUniqueName": "C:\\Users\\admin\\Desktop\\Projects\\DNC-KnightPi-Service\\KnightPi-Service\\KnightPi.DuckDetection.Core\\KnightPi.DuckDetection.Core.csproj",
         "projectName": "KnightPi.DuckDetection.Core",
-        "projectPath": "C:\\Users\\danie\\Desktop\\Projects\\KnightPi_Service\\KnightPi.DuckDetection.Core\\KnightPi.DuckDetection.Core.csproj",
-        "packagesPath": "C:\\Users\\danie\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\danie\\Desktop\\Projects\\KnightPi_Service\\KnightPi.DuckDetection.Core\\obj\\",
+        "projectPath": "C:\\Users\\admin\\Desktop\\Projects\\DNC-KnightPi-Service\\KnightPi-Service\\KnightPi.DuckDetection.Core\\KnightPi.DuckDetection.Core.csproj",
+        "packagesPath": "C:\\Users\\admin\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\admin\\Desktop\\Projects\\DNC-KnightPi-Service\\KnightPi-Service\\KnightPi.DuckDetection.Core\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-          "C:\\Users\\danie\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\admin\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
@@ -871,17 +867,16 @@
         },
         "frameworks": {
           "net10.0": {
-            "framework": "net10.0",
             "targetAlias": "net10.0",
             "projectReferences": {
-              "C:\\Users\\danie\\Desktop\\Projects\\KnightPi_Service\\KnightPi.DuckDetection.Abstractions\\KnightPi.DuckDetection.Abstractions.csproj": {
-                "projectPath": "C:\\Users\\danie\\Desktop\\Projects\\KnightPi_Service\\KnightPi.DuckDetection.Abstractions\\KnightPi.DuckDetection.Abstractions.csproj"
+              "C:\\Users\\admin\\Desktop\\Projects\\DNC-KnightPi-Service\\KnightPi-Service\\KnightPi.DuckDetection.Abstractions\\KnightPi.DuckDetection.Abstractions.csproj": {
+                "projectPath": "C:\\Users\\admin\\Desktop\\Projects\\DNC-KnightPi-Service\\KnightPi-Service\\KnightPi.DuckDetection.Abstractions\\KnightPi.DuckDetection.Abstractions.csproj"
               },
-              "C:\\Users\\danie\\Desktop\\Projects\\KnightPi_Service\\KnightPi.DuckDetection.Cv\\KnightPi.DuckDetection.Cv.csproj": {
-                "projectPath": "C:\\Users\\danie\\Desktop\\Projects\\KnightPi_Service\\KnightPi.DuckDetection.Cv\\KnightPi.DuckDetection.Cv.csproj"
+              "C:\\Users\\admin\\Desktop\\Projects\\DNC-KnightPi-Service\\KnightPi-Service\\KnightPi.DuckDetection.Cv\\KnightPi.DuckDetection.Cv.csproj": {
+                "projectPath": "C:\\Users\\admin\\Desktop\\Projects\\DNC-KnightPi-Service\\KnightPi-Service\\KnightPi.DuckDetection.Cv\\KnightPi.DuckDetection.Cv.csproj"
               },
-              "C:\\Users\\danie\\Desktop\\Projects\\KnightPi_Service\\KnightPi.DuckDetection.Ml\\KnightPi.DuckDetection.Ml.csproj": {
-                "projectPath": "C:\\Users\\danie\\Desktop\\Projects\\KnightPi_Service\\KnightPi.DuckDetection.Ml\\KnightPi.DuckDetection.Ml.csproj"
+              "C:\\Users\\admin\\Desktop\\Projects\\DNC-KnightPi-Service\\KnightPi-Service\\KnightPi.DuckDetection.Ml\\KnightPi.DuckDetection.Ml.csproj": {
+                "projectPath": "C:\\Users\\admin\\Desktop\\Projects\\DNC-KnightPi-Service\\KnightPi-Service\\KnightPi.DuckDetection.Ml\\KnightPi.DuckDetection.Ml.csproj"
               }
             }
           }
@@ -900,7 +895,6 @@
       },
       "frameworks": {
         "net10.0": {
-          "framework": "net10.0",
           "targetAlias": "net10.0",
           "imports": [
             "net461",
@@ -918,7 +912,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\10.0.201/PortableRuntimeIdentifierGraph.json",
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\10.0.202/PortableRuntimeIdentifierGraph.json",
           "packagesToPrune": {
             "Microsoft.CSharp": "(,4.7.32767]",
             "Microsoft.VisualBasic": "(,10.4.32767]",
@@ -1196,20 +1190,20 @@
         }
       }
     },
-    "C:\\Users\\danie\\Desktop\\Projects\\KnightPi_Service\\KnightPi.DuckDetection.Cv\\KnightPi.DuckDetection.Cv.csproj": {
+    "C:\\Users\\admin\\Desktop\\Projects\\DNC-KnightPi-Service\\KnightPi-Service\\KnightPi.DuckDetection.Cv\\KnightPi.DuckDetection.Cv.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\danie\\Desktop\\Projects\\KnightPi_Service\\KnightPi.DuckDetection.Cv\\KnightPi.DuckDetection.Cv.csproj",
+        "projectUniqueName": "C:\\Users\\admin\\Desktop\\Projects\\DNC-KnightPi-Service\\KnightPi-Service\\KnightPi.DuckDetection.Cv\\KnightPi.DuckDetection.Cv.csproj",
         "projectName": "KnightPi.DuckDetection.Cv",
-        "projectPath": "C:\\Users\\danie\\Desktop\\Projects\\KnightPi_Service\\KnightPi.DuckDetection.Cv\\KnightPi.DuckDetection.Cv.csproj",
-        "packagesPath": "C:\\Users\\danie\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\danie\\Desktop\\Projects\\KnightPi_Service\\KnightPi.DuckDetection.Cv\\obj\\",
+        "projectPath": "C:\\Users\\admin\\Desktop\\Projects\\DNC-KnightPi-Service\\KnightPi-Service\\KnightPi.DuckDetection.Cv\\KnightPi.DuckDetection.Cv.csproj",
+        "packagesPath": "C:\\Users\\admin\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\admin\\Desktop\\Projects\\DNC-KnightPi-Service\\KnightPi-Service\\KnightPi.DuckDetection.Cv\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-          "C:\\Users\\danie\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\admin\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
@@ -1223,11 +1217,10 @@
         },
         "frameworks": {
           "net10.0": {
-            "framework": "net10.0",
             "targetAlias": "net10.0",
             "projectReferences": {
-              "C:\\Users\\danie\\Desktop\\Projects\\KnightPi_Service\\KnightPi.DuckDetection.Abstractions\\KnightPi.DuckDetection.Abstractions.csproj": {
-                "projectPath": "C:\\Users\\danie\\Desktop\\Projects\\KnightPi_Service\\KnightPi.DuckDetection.Abstractions\\KnightPi.DuckDetection.Abstractions.csproj"
+              "C:\\Users\\admin\\Desktop\\Projects\\DNC-KnightPi-Service\\KnightPi-Service\\KnightPi.DuckDetection.Abstractions\\KnightPi.DuckDetection.Abstractions.csproj": {
+                "projectPath": "C:\\Users\\admin\\Desktop\\Projects\\DNC-KnightPi-Service\\KnightPi-Service\\KnightPi.DuckDetection.Abstractions\\KnightPi.DuckDetection.Abstractions.csproj"
               }
             }
           }
@@ -1246,7 +1239,6 @@
       },
       "frameworks": {
         "net10.0": {
-          "framework": "net10.0",
           "targetAlias": "net10.0",
           "dependencies": {
             "OpenCvSharp4": {
@@ -1274,7 +1266,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\10.0.201/PortableRuntimeIdentifierGraph.json",
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\10.0.202/PortableRuntimeIdentifierGraph.json",
           "packagesToPrune": {
             "Microsoft.CSharp": "(,4.7.32767]",
             "Microsoft.VisualBasic": "(,10.4.32767]",
@@ -1552,20 +1544,20 @@
         }
       }
     },
-    "C:\\Users\\danie\\Desktop\\Projects\\KnightPi_Service\\KnightPi.DuckDetection.Ml\\KnightPi.DuckDetection.Ml.csproj": {
+    "C:\\Users\\admin\\Desktop\\Projects\\DNC-KnightPi-Service\\KnightPi-Service\\KnightPi.DuckDetection.Ml\\KnightPi.DuckDetection.Ml.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\danie\\Desktop\\Projects\\KnightPi_Service\\KnightPi.DuckDetection.Ml\\KnightPi.DuckDetection.Ml.csproj",
+        "projectUniqueName": "C:\\Users\\admin\\Desktop\\Projects\\DNC-KnightPi-Service\\KnightPi-Service\\KnightPi.DuckDetection.Ml\\KnightPi.DuckDetection.Ml.csproj",
         "projectName": "KnightPi.DuckDetection.Ml",
-        "projectPath": "C:\\Users\\danie\\Desktop\\Projects\\KnightPi_Service\\KnightPi.DuckDetection.Ml\\KnightPi.DuckDetection.Ml.csproj",
-        "packagesPath": "C:\\Users\\danie\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\danie\\Desktop\\Projects\\KnightPi_Service\\KnightPi.DuckDetection.Ml\\obj\\",
+        "projectPath": "C:\\Users\\admin\\Desktop\\Projects\\DNC-KnightPi-Service\\KnightPi-Service\\KnightPi.DuckDetection.Ml\\KnightPi.DuckDetection.Ml.csproj",
+        "packagesPath": "C:\\Users\\admin\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\admin\\Desktop\\Projects\\DNC-KnightPi-Service\\KnightPi-Service\\KnightPi.DuckDetection.Ml\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-          "C:\\Users\\danie\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\admin\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
@@ -1579,11 +1571,10 @@
         },
         "frameworks": {
           "net10.0": {
-            "framework": "net10.0",
             "targetAlias": "net10.0",
             "projectReferences": {
-              "C:\\Users\\danie\\Desktop\\Projects\\KnightPi_Service\\KnightPi.DuckDetection.Abstractions\\KnightPi.DuckDetection.Abstractions.csproj": {
-                "projectPath": "C:\\Users\\danie\\Desktop\\Projects\\KnightPi_Service\\KnightPi.DuckDetection.Abstractions\\KnightPi.DuckDetection.Abstractions.csproj"
+              "C:\\Users\\admin\\Desktop\\Projects\\DNC-KnightPi-Service\\KnightPi-Service\\KnightPi.DuckDetection.Abstractions\\KnightPi.DuckDetection.Abstractions.csproj": {
+                "projectPath": "C:\\Users\\admin\\Desktop\\Projects\\DNC-KnightPi-Service\\KnightPi-Service\\KnightPi.DuckDetection.Abstractions\\KnightPi.DuckDetection.Abstractions.csproj"
               }
             }
           }
@@ -1602,7 +1593,6 @@
       },
       "frameworks": {
         "net10.0": {
-          "framework": "net10.0",
           "targetAlias": "net10.0",
           "imports": [
             "net461",
@@ -1620,7 +1610,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\10.0.201/PortableRuntimeIdentifierGraph.json",
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\10.0.202/PortableRuntimeIdentifierGraph.json",
           "packagesToPrune": {
             "Microsoft.CSharp": "(,4.7.32767]",
             "Microsoft.VisualBasic": "(,10.4.32767]",

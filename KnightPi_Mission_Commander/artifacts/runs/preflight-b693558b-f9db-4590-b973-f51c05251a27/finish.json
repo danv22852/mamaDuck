@@ -1,0 +1,49 @@
+{
+  "finishedAtUtc": "2026-04-19T22:28:45.312215+00:00",
+  "outcome": "FAILED",
+  "summaryData": {
+    "run_id": "preflight-b693558b-f9db-4590-b973-f51c05251a27",
+    "success": false,
+    "started_at_utc": "2026-04-19T22:28:44.855950+00:00",
+    "finished_at_utc": "2026-04-19T22:28:45.312215+00:00",
+    "checks": [
+      {
+        "name": "camera_ready",
+        "ok": true,
+        "detail": "camera client initialized",
+        "data": null
+      },
+      {
+        "name": "cv_client_ready",
+        "ok": true,
+        "detail": "cv client initialized",
+        "data": null
+      },
+      {
+        "name": "mission_registered",
+        "ok": true,
+        "detail": "duck_pick_and_drop_cycle mission registered",
+        "data": null
+      },
+      {
+        "name": "vision_pipeline",
+        "ok": true,
+        "detail": "image analyzed",
+        "data": {
+          "action": "CV_ANALYZE_IMAGE"
+        }
+      },
+      {
+        "name": "esp32_connect_ping",
+        "ok": false,
+        "detail": "could not open port 'COM5': FileNotFoundError(2, 'The system cannot find the file specified.', None, 2)",
+        "data": null
+      }
+    ],
+    "summary": {
+      "checkCount": 5,
+      "passedCount": 4,
+      "failedCount": 1
+    }
+  }
+}

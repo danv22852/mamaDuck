@@ -9,6 +9,7 @@ class UltrasonicScanner
 {
 public:
     void init(int trigPin, int echoPin, DriveBase* driveBase);
+    void startBackgroundMonitorTask();
     float readDistanceMm();
 
     bool usScan(
@@ -19,6 +20,10 @@ public:
         ScanRotation rotation,
         UltrasonicSweepResult& result
     );
+
+private:
+    static void monitorTaskEntry(void* param);
+    void monitorTaskLoop();
 
 private:
     UltrasonicDriver m_ultrasonicDriver;

@@ -37,6 +37,8 @@ public sealed class CvDuckDetector : IDuckDetector
                 return BuildError($"Unable to read image: {request.ImagePath}");
             }
 
+            Cv2.Rotate(source, source, RotateFlags.Rotate180);
+
             int frameWidth = source.Width;
             int frameHeight = source.Height;
 

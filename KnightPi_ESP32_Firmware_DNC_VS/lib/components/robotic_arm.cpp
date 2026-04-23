@@ -1,18 +1,9 @@
 #include "robotic_arm.h"
+#include "../common/runtime_state.h"
 #include <math.h>
 
 RoboticArm::RoboticArm()
     : m_initialized(false),
-      m_openClawAngleDeg(150),
-      m_closedClawAngleDeg(90),
-      m_wristApproachAngleDeg(90),
-      m_wristPickupAngleDeg(90),
-      m_approachLiftMm(45.0f),
-      m_postGripLiftMm(70.0f),
-      m_minDistanceMm(60.0f),
-      m_maxDistanceMm(250.0f),
-      m_minHeightMm(0.0f),
-      m_maxHeightMm(180.0f),
       m_settleMs(600),
       m_clawSettleMs(700)
 {
@@ -38,98 +29,26 @@ void RoboticArm::init(
         50
     );
 
-    ArmRestPosition();
-    
+    armRestPosition();
     m_initialized = true;
 }
 
-void RoboticArm::ArmCheck()
-{
-    // CHASIS Check 
-    m_armDriver.setChassisAngle(30);
-    delay(300);
-    m_armDriver.setChassisAngle(150);
-    delay(300);
-    m_armDriver.setChassisAngle(88);
-    delay(300);
-
-    //SHOULDER Check
-    m_armDriver.setElbowAngle(90);  // avoid collisions
-    delay(300);
-    m_armDriver.setShoulderAngle(35);
-    delay(300);
-    m_armDriver.setShoulderAngle(90);
-    delay(300);
-    m_armDriver.setShoulderAngle(120);
-    delay(300);
-    m_armDriver.setShoulderAngle(35);
-    delay(300);
-
-    // ELBOW Check
-    m_armDriver.setShoulderAngle(90);
-    delay(300);
-    m_armDriver.setElbowAngle(35);
-    delay(300);
-    m_armDriver.setElbowAngle(90);
-    delay(300);
-    m_armDriver.setElbowAngle(120);
-    delay(300);
-    m_armDriver.setElbowAngle(160);
-    delay(300);
-    m_armDriver.setElbowAngle(35);
-    delay(300);
-    m_armDriver.setShoulderAngle(35);
-    delay(300);
-
-    // WRIST Check
-    m_armDriver.setWristAngle(100);
-    delay(300);
-    m_armDriver.setWristAngle(120);
-    delay(300);
-    m_armDriver.setWristAngle(160);
-    delay(300);
-    m_armDriver.setWristAngle(120);
-    delay(300);
-    m_armDriver.setWristAngle(60);
-    delay(300);
-    m_armDriver.setWristAngle(30);
-    delay(300);
-    m_armDriver.setWristAngle(60);
-    delay(300);
-    m_armDriver.setWristAngle(100);
-    delay(300);
-
-    // CLAW Check
-    m_armDriver.setClawAngle(100);
-    delay(300);
-    m_armDriver.setClawAngle(130);
-    delay(300);
-    m_armDriver.setClawAngle(150);
-    delay(300);
-    m_armDriver.setClawAngle(170);
-    delay(300);
-    m_armDriver.setClawAngle(90);
-    delay(300);
-    m_armDriver.setClawAngle(100);
-    delay(300);
-}
-
-void RoboticArm::ArmRestPosition()
+void RoboticArm::armRestPosition()
 {
     m_armDriver.setChassisAngle(88);
-    delay(300);
+    vTaskDelay(pdMS_TO_TICKS(300));
 
     m_armDriver.setShoulderAngle(35);
-    delay(300);
+    vTaskDelay(pdMS_TO_TICKS(300));
 
     m_armDriver.setElbowAngle(35);
-    delay(300);
+    vTaskDelay(pdMS_TO_TICKS(300));
 
     m_armDriver.setWristAngle(100);
-    delay(300);
+    vTaskDelay(pdMS_TO_TICKS(300));
 
     m_armDriver.setClawAngle(100);
-    delay(300);
+    vTaskDelay(pdMS_TO_TICKS(300));
 }
 
 bool RoboticArm::isInitialized() const
@@ -148,7 +67,20 @@ bool RoboticArm::validateServoAngle(float angleDeg) const
     return angleDeg >= 0.0f && angleDeg <= 180.0f;
 }
 
-ArmPickResult RoboticArm::pickByAngles(
+ArmResult RoboticArm::waitCancelable(unsigned long waitMs)
+{
+    unsigned long startedAt = millis();
+
+    while ((millis() - startedAt) < waitMs)
+    {
+        if (RuntimeState::instance().shouldCancelArm()) return ARM_RESULT_CANCELLED;
+        vTaskDelay(pdMS_TO_TICKS(10));
+    }
+
+    return ARM_RESULT_OK;
+}
+
+ArmPickResult RoboticArm::pickByAnglesWithSpeed(
     float pickupChassisAngleDeg,
     float pickupShoulderAngleDeg,
     float pickupElbowAngleDeg,
@@ -159,7 +91,8 @@ ArmPickResult RoboticArm::pickByAngles(
     float liftShoulderAngleDeg,
     float liftElbowAngleDeg,
     float liftWristAngleDeg,
-    const ArmServoStepDelay& stepDelay,
+    const ArmServoSpeed& pickupSpeed,
+    const ArmServoSpeed& liftSpeed,
     const ArmMotionOptions& pickupOptions,
     const ArmMotionOptions& liftOptions
 )
@@ -193,21 +126,25 @@ ArmPickResult RoboticArm::pickByAngles(
     pickupPose.useElbow = true;
     pickupPose.useWrist = true;
     pickupPose.useClaw = true;
-
     pickupPose.chassisDeg = (int)roundf(pickupChassisAngleDeg);
     pickupPose.shoulderDeg = (int)roundf(pickupShoulderAngleDeg);
     pickupPose.elbowDeg = (int)roundf(pickupElbowAngleDeg);
     pickupPose.wristDeg = (int)roundf(pickupWristAngleDeg);
     pickupPose.clawDeg = (int)roundf(openClawAngleDeg);
 
-    ArmResult result = m_armDriver.movePose(pickupPose, stepDelay, pickupOptions);
+    ArmResult result = m_armDriver.movePoseBySpeed(pickupPose, pickupSpeed, pickupOptions);
     if (result != ARM_RESULT_OK)
     {
         pickResult.result = result;
         return pickResult;
     }
 
-    delay(m_settleMs);
+    result = waitCancelable(m_settleMs);
+    if (result != ARM_RESULT_OK)
+    {
+        pickResult.result = result;
+        return pickResult;
+    }
 
     ArmPoseAngles closePose;
     closePose.useClaw = true;
@@ -218,14 +155,19 @@ ArmPickResult RoboticArm::pickByAngles(
     clawOnlyOptions.servoOrderCount = 1;
     clawOnlyOptions.servoOrder[0] = ARM_SERVO_CLAW;
 
-    result = m_armDriver.movePose(closePose, stepDelay, clawOnlyOptions);
+    result = m_armDriver.movePoseBySpeed(closePose, pickupSpeed, clawOnlyOptions);
     if (result != ARM_RESULT_OK)
     {
         pickResult.result = result;
         return pickResult;
     }
 
-    delay(m_clawSettleMs);
+    result = waitCancelable(m_clawSettleMs);
+    if (result != ARM_RESULT_OK)
+    {
+        pickResult.result = result;
+        return pickResult;
+    }
 
     ArmPoseAngles liftPose;
     liftPose.useChassis = true;
@@ -233,20 +175,24 @@ ArmPickResult RoboticArm::pickByAngles(
     liftPose.useElbow = true;
     liftPose.useWrist = true;
     liftPose.useClaw = false;
-
     liftPose.chassisDeg = (int)roundf(liftChassisAngleDeg);
     liftPose.shoulderDeg = (int)roundf(liftShoulderAngleDeg);
     liftPose.elbowDeg = (int)roundf(liftElbowAngleDeg);
     liftPose.wristDeg = (int)roundf(liftWristAngleDeg);
 
-    result = m_armDriver.movePose(liftPose, stepDelay, liftOptions);
+    result = m_armDriver.movePoseBySpeed(liftPose, liftSpeed, liftOptions);
     if (result != ARM_RESULT_OK)
     {
         pickResult.result = result;
         return pickResult;
     }
 
-    delay(m_settleMs);
+    result = waitCancelable(m_settleMs);
+    if (result != ARM_RESULT_OK)
+    {
+        pickResult.result = result;
+        return pickResult;
+    }
 
     pickResult.result = ARM_RESULT_OK;
     pickResult.picked = true;
@@ -254,7 +200,7 @@ ArmPickResult RoboticArm::pickByAngles(
     return pickResult;
 }
 
-ArmDropResult RoboticArm::dropByAngles(
+ArmDropResult RoboticArm::dropByAnglesWithSpeed(
     float dropChassisAngleDeg,
     float dropShoulderAngleDeg,
     float dropElbowAngleDeg,
@@ -264,7 +210,8 @@ ArmDropResult RoboticArm::dropByAngles(
     float retreatShoulderAngleDeg,
     float retreatElbowAngleDeg,
     float retreatWristAngleDeg,
-    const ArmServoStepDelay& stepDelay,
+    const ArmServoSpeed& dropSpeed,
+    const ArmServoSpeed& retreatSpeed,
     const ArmMotionOptions& dropOptions,
     const ArmMotionOptions& retreatOptions
 )
@@ -297,20 +244,24 @@ ArmDropResult RoboticArm::dropByAngles(
     dropPose.useElbow = true;
     dropPose.useWrist = true;
     dropPose.useClaw = false;
-
     dropPose.chassisDeg = (int)roundf(dropChassisAngleDeg);
     dropPose.shoulderDeg = (int)roundf(dropShoulderAngleDeg);
     dropPose.elbowDeg = (int)roundf(dropElbowAngleDeg);
     dropPose.wristDeg = (int)roundf(dropWristAngleDeg);
 
-    ArmResult result = m_armDriver.movePose(dropPose, stepDelay, dropOptions);
+    ArmResult result = m_armDriver.movePoseBySpeed(dropPose, dropSpeed, dropOptions);
     if (result != ARM_RESULT_OK)
     {
         dropResult.result = result;
         return dropResult;
     }
 
-    delay(m_settleMs);
+    result = waitCancelable(m_settleMs);
+    if (result != ARM_RESULT_OK)
+    {
+        dropResult.result = result;
+        return dropResult;
+    }
 
     ArmPoseAngles openPose;
     openPose.useClaw = true;
@@ -321,14 +272,20 @@ ArmDropResult RoboticArm::dropByAngles(
     clawOnlyOptions.servoOrderCount = 1;
     clawOnlyOptions.servoOrder[0] = ARM_SERVO_CLAW;
 
-    result = m_armDriver.movePose(openPose, stepDelay, clawOnlyOptions);
+    result = m_armDriver.movePoseBySpeed(openPose, dropSpeed, clawOnlyOptions);
     if (result != ARM_RESULT_OK)
     {
         dropResult.result = result;
         return dropResult;
     }
 
-    delay(m_clawSettleMs);
+    result = waitCancelable(m_clawSettleMs);
+    if (result != ARM_RESULT_OK)
+    {
+        dropResult.result = result;
+        return dropResult;
+    }
+
     dropResult.dropped = true;
 
     ArmPoseAngles retreatPose;
@@ -337,33 +294,37 @@ ArmDropResult RoboticArm::dropByAngles(
     retreatPose.useElbow = true;
     retreatPose.useWrist = true;
     retreatPose.useClaw = false;
-
     retreatPose.chassisDeg = (int)roundf(retreatChassisAngleDeg);
     retreatPose.shoulderDeg = (int)roundf(retreatShoulderAngleDeg);
     retreatPose.elbowDeg = (int)roundf(retreatElbowAngleDeg);
     retreatPose.wristDeg = (int)roundf(retreatWristAngleDeg);
 
-    result = m_armDriver.movePose(retreatPose, stepDelay, retreatOptions);
+    result = m_armDriver.movePoseBySpeed(retreatPose, retreatSpeed, retreatOptions);
     if (result != ARM_RESULT_OK)
     {
         dropResult.result = result;
         return dropResult;
     }
 
-    delay(m_settleMs);
+    result = waitCancelable(m_settleMs);
+    if (result != ARM_RESULT_OK)
+    {
+        dropResult.result = result;
+        return dropResult;
+    }
 
     dropResult.result = ARM_RESULT_OK;
     dropResult.retreatedToSafePose = true;
     return dropResult;
 }
 
-ArmResult RoboticArm::moveByAngles(
+ArmResult RoboticArm::moveByAnglesWithSpeed(
     float chassisAngleDeg,
     float shoulderAngleDeg,
     float elbowAngleDeg,
     float wristAngleDeg,
     float clawAngleDeg,
-    const ArmServoStepDelay& stepDelay,
+    const ArmServoSpeed& speedProfile,
     const ArmMotionOptions& moveOptions
 )
 {
@@ -384,131 +345,14 @@ ArmResult RoboticArm::moveByAngles(
     pose.useElbow = true;
     pose.useWrist = true;
     pose.useClaw = true;
-
     pose.chassisDeg = (int)roundf(chassisAngleDeg);
     pose.shoulderDeg = (int)roundf(shoulderAngleDeg);
     pose.elbowDeg = (int)roundf(elbowAngleDeg);
     pose.wristDeg = (int)roundf(wristAngleDeg);
     pose.clawDeg = (int)roundf(clawAngleDeg);
 
-    ArmResult result = m_armDriver.movePose(pose, stepDelay, moveOptions);
-    if (result != ARM_RESULT_OK)
-    {
-        return result;
-    }
+    ArmResult result = m_armDriver.movePoseBySpeed(pose, speedProfile, moveOptions);
+    if (result != ARM_RESULT_OK) return result;
 
-    delay(m_settleMs);
-    return ARM_RESULT_OK;
-}
-
-ArmResult RoboticArm::pickObject(
-    float chassisAngleDeg,
-    float distanceFromChassisCenterMm,
-    float pickupHeightFromFloorMm
-)
-{
-    if (!isInitialized()) return ARM_RESULT_NOT_INITIALIZED;
-
-    if (!validatePickRequest(chassisAngleDeg, distanceFromChassisCenterMm, pickupHeightFromFloorMm))
-    {
-        return ARM_RESULT_INVALID_ARGUMENT;
-    }
-
-    ArmPointMm target = polarToCartesianMm(
-        chassisAngleDeg,
-        distanceFromChassisCenterMm,
-        pickupHeightFromFloorMm
-    );
-
-    ArmPointMm approach = target;
-    approach.zMm += m_approachLiftMm;
-
-    ArmPointMm retreat = target;
-    retreat.zMm += m_postGripLiftMm;
-
-    m_armDriver.setWristAngle(m_wristApproachAngleDeg);
-    delay(250);
-
-    m_armDriver.setClawAngle(m_openClawAngleDeg);
-    delay(m_clawSettleMs);
-
-    ArmResult result = moveAndWait(approach, m_settleMs);
-    if (result != ARM_RESULT_OK)
-    {
-        return result;
-    }
-
-    m_armDriver.setWristAngle(m_wristPickupAngleDeg);
-    delay(250);
-
-    result = moveAndWait(target, m_settleMs);
-    if (result != ARM_RESULT_OK)
-    {
-        return result;
-    }
-
-    m_armDriver.setClawAngle(m_closedClawAngleDeg);
-    delay(m_clawSettleMs);
-
-    result = moveAndWait(retreat, m_settleMs);
-    if (result != ARM_RESULT_OK)
-    {
-        return result;
-    }
-
-    return ARM_RESULT_OK;
-}
-
-bool RoboticArm::validatePickRequest(
-    float chassisAngleDeg,
-    float distanceMm,
-    float heightMm
-) const
-{
-    (void)chassisAngleDeg;
-
-    if (!isInitialized()) return false;
-  
-    if (distanceMm < m_minDistanceMm || distanceMm > m_maxDistanceMm)
-    {
-        return false;
-    }
-
-    if (heightMm < m_minHeightMm || heightMm > m_maxHeightMm)
-    {
-        return false;
-    }
-
-    return true;
-}
-
-ArmPointMm RoboticArm::polarToCartesianMm(
-    float chassisAngleDeg,
-    float distanceMm,
-    float zMm
-) const
-{
-    float thetaRad = chassisAngleDeg * DEG_TO_RAD;
-
-    ArmPointMm point;
-    point.xMm = distanceMm * sinf(thetaRad);
-    point.yMm = distanceMm * cosf(thetaRad);
-    point.zMm = zMm;
-
-    return point;
-}
-
-ArmResult RoboticArm::moveAndWait(
-    const ArmPointMm& pointMm,
-    unsigned long waitMs
-)
-{
-    ArmResult result = m_armDriver.moveToCartesianMm(pointMm);
-    if (result != ARM_RESULT_OK)
-    {
-        return result;
-    }
-
-    delay(waitMs);
-    return ARM_RESULT_OK;
+    return waitCancelable(m_settleMs);
 }

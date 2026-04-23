@@ -11,19 +11,6 @@ private:
     ArmDriver m_armDriver;
     bool m_initialized;
 
-    int m_openClawAngleDeg;
-    int m_closedClawAngleDeg;
-    int m_wristApproachAngleDeg;
-    int m_wristPickupAngleDeg;
-
-    float m_approachLiftMm;
-    float m_postGripLiftMm;
-
-    float m_minDistanceMm;
-    float m_maxDistanceMm;
-    float m_minHeightMm;
-    float m_maxHeightMm;
-
     unsigned long m_settleMs;
     unsigned long m_clawSettleMs;
 
@@ -41,13 +28,7 @@ public:
     bool isInitialized() const;
     void home();
 
-    ArmResult pickObject(
-        float chassisAngleDeg,
-        float distanceFromChassisCenterMm,
-        float pickupHeightFromFloorMm
-    );
-
-    ArmPickResult pickByAngles(
+    ArmPickResult pickByAnglesWithSpeed(
         float pickupChassisAngleDeg,
         float pickupShoulderAngleDeg,
         float pickupElbowAngleDeg,
@@ -58,12 +39,13 @@ public:
         float liftShoulderAngleDeg,
         float liftElbowAngleDeg,
         float liftWristAngleDeg,
-        const ArmServoStepDelay& stepDelay,
+        const ArmServoSpeed& pickupSpeed,
+        const ArmServoSpeed& liftSpeed,
         const ArmMotionOptions& pickupOptions,
         const ArmMotionOptions& liftOptions
     );
 
-    ArmDropResult dropByAngles(
+    ArmDropResult dropByAnglesWithSpeed(
         float dropChassisAngleDeg,
         float dropShoulderAngleDeg,
         float dropElbowAngleDeg,
@@ -73,43 +55,26 @@ public:
         float retreatShoulderAngleDeg,
         float retreatElbowAngleDeg,
         float retreatWristAngleDeg,
-        const ArmServoStepDelay& stepDelay,
+        const ArmServoSpeed& dropSpeed,
+        const ArmServoSpeed& retreatSpeed,
         const ArmMotionOptions& dropOptions,
         const ArmMotionOptions& retreatOptions
     );
 
-    ArmResult moveByAngles(
+    ArmResult moveByAnglesWithSpeed(
         float chassisAngleDeg,
         float shoulderAngleDeg,
         float elbowAngleDeg,
         float wristAngleDeg,
         float clawAngleDeg,
-        const ArmServoStepDelay& stepDelay,
+        const ArmServoSpeed& speedProfile,
         const ArmMotionOptions& moveOptions
     );
 
 private:
-    void ArmCheck();
-    void ArmRestPosition();
-
-    bool validatePickRequest(
-        float chassisAngleDeg,
-        float distanceMm,
-        float heightMm
-    ) const;
-
+    void armRestPosition();
     bool validateServoAngle(float angleDeg) const;
-
-    ArmPointMm polarToCartesianMm(
-        float chassisAngleDeg,
-        float distanceMm,
-        float zMm
-    ) const;
-
-    ArmResult moveAndWait(
-        const ArmPointMm& pointMm,
-        unsigned long waitMs
-    );
+    ArmResult waitCancelable(unsigned long waitMs);
 };
 
 #endif

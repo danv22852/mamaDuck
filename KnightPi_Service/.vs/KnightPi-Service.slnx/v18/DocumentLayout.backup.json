@@ -1,38 +1,58 @@
 {
   "Version": 1,
-  "WorkspaceRootPath": "C:\\Users\\danie\\Desktop\\Projects\\KnightPi_Service\\",
+  "WorkspaceRootPath": "C:\\Users\\admin\\Desktop\\Projects\\DNC-KnightPi-Service\\KnightPi-Service\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{F599EBD4-BE11-4ED0-A784-2389AA919866}|KnightPi.DuckDetection.Cv\\KnightPi.DuckDetection.Cv.csproj|c:\\users\\danie\\desktop\\projects\\knightpi_service\\knightpi.duckdetection.cv\\cvduckdetector.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{F599EBD4-BE11-4ED0-A784-2389AA919866}|KnightPi.DuckDetection.Cv\\KnightPi.DuckDetection.Cv.csproj|c:\\users\\admin\\desktop\\projects\\dnc-knightpi-service\\knightpi-service\\knightpi.duckdetection.cv\\cvduckdetector.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{F599EBD4-BE11-4ED0-A784-2389AA919866}|KnightPi.DuckDetection.Cv\\KnightPi.DuckDetection.Cv.csproj|solutionrelative:knightpi.duckdetection.cv\\cvduckdetector.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{B45A65D8-AE30-49A6-B35B-A43A1CC20D72}|KnightPi.DuckDetection.Core\\KnightPi.DuckDetection.Core.csproj|c:\\users\\danie\\desktop\\projects\\knightpi_service\\knightpi.duckdetection.core\\duckdetectorfactory.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{B45A65D8-AE30-49A6-B35B-A43A1CC20D72}|KnightPi.DuckDetection.Core\\KnightPi.DuckDetection.Core.csproj|solutionrelative:knightpi.duckdetection.core\\duckdetectorfactory.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{2E2FB654-9C51-4883-AE30-3C5F18EDA22A}|KnightPi.DuckDetection.Abstractions\\KnightPi.DuckDetection.Abstractions.csproj|c:\\users\\admin\\desktop\\projects\\dnc-knightpi-service\\knightpi-service\\knightpi.duckdetection.abstractions\\imagesize.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{2E2FB654-9C51-4883-AE30-3C5F18EDA22A}|KnightPi.DuckDetection.Abstractions\\KnightPi.DuckDetection.Abstractions.csproj|solutionrelative:knightpi.duckdetection.abstractions\\imagesize.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{F599EBD4-BE11-4ED0-A784-2389AA919866}|KnightPi.DuckDetection.Cv\\KnightPi.DuckDetection.Cv.csproj|c:\\users\\danie\\desktop\\projects\\knightpi_service\\knightpi.duckdetection.cv\\cvduckdetectorsettings.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{F599EBD4-BE11-4ED0-A784-2389AA919866}|KnightPi.DuckDetection.Cv\\KnightPi.DuckDetection.Cv.csproj|solutionrelative:knightpi.duckdetection.cv\\cvduckdetectorsettings.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{2E2FB654-9C51-4883-AE30-3C5F18EDA22A}|KnightPi.DuckDetection.Abstractions\\KnightPi.DuckDetection.Abstractions.csproj|c:\\users\\admin\\desktop\\projects\\dnc-knightpi-service\\knightpi-service\\knightpi.duckdetection.abstractions\\imagepoint.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{2E2FB654-9C51-4883-AE30-3C5F18EDA22A}|KnightPi.DuckDetection.Abstractions\\KnightPi.DuckDetection.Abstractions.csproj|solutionrelative:knightpi.duckdetection.abstractions\\imagepoint.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{2E2FB654-9C51-4883-AE30-3C5F18EDA22A}|KnightPi.DuckDetection.Abstractions\\KnightPi.DuckDetection.Abstractions.csproj|c:\\users\\danie\\desktop\\projects\\knightpi_service\\knightpi.duckdetection.abstractions\\duckdetectionresult.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{2E2FB654-9C51-4883-AE30-3C5F18EDA22A}|KnightPi.DuckDetection.Abstractions\\KnightPi.DuckDetection.Abstractions.csproj|c:\\users\\admin\\desktop\\projects\\dnc-knightpi-service\\knightpi-service\\knightpi.duckdetection.abstractions\\iduckdetectorfactory.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{2E2FB654-9C51-4883-AE30-3C5F18EDA22A}|KnightPi.DuckDetection.Abstractions\\KnightPi.DuckDetection.Abstractions.csproj|solutionrelative:knightpi.duckdetection.abstractions\\iduckdetectorfactory.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2E2FB654-9C51-4883-AE30-3C5F18EDA22A}|KnightPi.DuckDetection.Abstractions\\KnightPi.DuckDetection.Abstractions.csproj|c:\\users\\admin\\desktop\\projects\\dnc-knightpi-service\\knightpi-service\\knightpi.duckdetection.abstractions\\iduckdetector.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{2E2FB654-9C51-4883-AE30-3C5F18EDA22A}|KnightPi.DuckDetection.Abstractions\\KnightPi.DuckDetection.Abstractions.csproj|solutionrelative:knightpi.duckdetection.abstractions\\iduckdetector.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2E2FB654-9C51-4883-AE30-3C5F18EDA22A}|KnightPi.DuckDetection.Abstractions\\KnightPi.DuckDetection.Abstractions.csproj|c:\\users\\admin\\desktop\\projects\\dnc-knightpi-service\\knightpi-service\\knightpi.duckdetection.abstractions\\duckhorizontalposition.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{2E2FB654-9C51-4883-AE30-3C5F18EDA22A}|KnightPi.DuckDetection.Abstractions\\KnightPi.DuckDetection.Abstractions.csproj|solutionrelative:knightpi.duckdetection.abstractions\\duckhorizontalposition.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2E2FB654-9C51-4883-AE30-3C5F18EDA22A}|KnightPi.DuckDetection.Abstractions\\KnightPi.DuckDetection.Abstractions.csproj|c:\\users\\admin\\desktop\\projects\\dnc-knightpi-service\\knightpi-service\\knightpi.duckdetection.abstractions\\duckdetectorkind.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{2E2FB654-9C51-4883-AE30-3C5F18EDA22A}|KnightPi.DuckDetection.Abstractions\\KnightPi.DuckDetection.Abstractions.csproj|solutionrelative:knightpi.duckdetection.abstractions\\duckdetectorkind.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2E2FB654-9C51-4883-AE30-3C5F18EDA22A}|KnightPi.DuckDetection.Abstractions\\KnightPi.DuckDetection.Abstractions.csproj|c:\\users\\admin\\desktop\\projects\\dnc-knightpi-service\\knightpi-service\\knightpi.duckdetection.abstractions\\duckdetectionresult.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{2E2FB654-9C51-4883-AE30-3C5F18EDA22A}|KnightPi.DuckDetection.Abstractions\\KnightPi.DuckDetection.Abstractions.csproj|solutionrelative:knightpi.duckdetection.abstractions\\duckdetectionresult.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{2E2FB654-9C51-4883-AE30-3C5F18EDA22A}|KnightPi.DuckDetection.Abstractions\\KnightPi.DuckDetection.Abstractions.csproj|c:\\users\\danie\\desktop\\projects\\knightpi_service\\knightpi.duckdetection.abstractions\\dropzoneinfo.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{2E2FB654-9C51-4883-AE30-3C5F18EDA22A}|KnightPi.DuckDetection.Abstractions\\KnightPi.DuckDetection.Abstractions.csproj|solutionrelative:knightpi.duckdetection.abstractions\\dropzoneinfo.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{2E2FB654-9C51-4883-AE30-3C5F18EDA22A}|KnightPi.DuckDetection.Abstractions\\KnightPi.DuckDetection.Abstractions.csproj|c:\\users\\admin\\desktop\\projects\\dnc-knightpi-service\\knightpi-service\\knightpi.duckdetection.abstractions\\duckdetectionrequest.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{2E2FB654-9C51-4883-AE30-3C5F18EDA22A}|KnightPi.DuckDetection.Abstractions\\KnightPi.DuckDetection.Abstractions.csproj|solutionrelative:knightpi.duckdetection.abstractions\\duckdetectionrequest.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{2E2FB654-9C51-4883-AE30-3C5F18EDA22A}|KnightPi.DuckDetection.Abstractions\\KnightPi.DuckDetection.Abstractions.csproj|c:\\users\\danie\\desktop\\projects\\knightpi_service\\knightpi.duckdetection.abstractions\\blueboundaryinfo.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{2E2FB654-9C51-4883-AE30-3C5F18EDA22A}|KnightPi.DuckDetection.Abstractions\\KnightPi.DuckDetection.Abstractions.csproj|solutionrelative:knightpi.duckdetection.abstractions\\blueboundaryinfo.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{2E2FB654-9C51-4883-AE30-3C5F18EDA22A}|KnightPi.DuckDetection.Abstractions\\KnightPi.DuckDetection.Abstractions.csproj|c:\\users\\danie\\desktop\\projects\\knightpi_service\\knightpi.duckdetection.abstractions\\duckcandidateresult.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{2E2FB654-9C51-4883-AE30-3C5F18EDA22A}|KnightPi.DuckDetection.Abstractions\\KnightPi.DuckDetection.Abstractions.csproj|c:\\users\\admin\\desktop\\projects\\dnc-knightpi-service\\knightpi-service\\knightpi.duckdetection.abstractions\\duckcandidateresult.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{2E2FB654-9C51-4883-AE30-3C5F18EDA22A}|KnightPi.DuckDetection.Abstractions\\KnightPi.DuckDetection.Abstractions.csproj|solutionrelative:knightpi.duckdetection.abstractions\\duckcandidateresult.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{2E2FB654-9C51-4883-AE30-3C5F18EDA22A}|KnightPi.DuckDetection.Abstractions\\KnightPi.DuckDetection.Abstractions.csproj|c:\\users\\danie\\desktop\\projects\\knightpi_service\\knightpi.duckdetection.abstractions\\imagepoint.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{2E2FB654-9C51-4883-AE30-3C5F18EDA22A}|KnightPi.DuckDetection.Abstractions\\KnightPi.DuckDetection.Abstractions.csproj|solutionrelative:knightpi.duckdetection.abstractions\\imagepoint.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{2E2FB654-9C51-4883-AE30-3C5F18EDA22A}|KnightPi.DuckDetection.Abstractions\\KnightPi.DuckDetection.Abstractions.csproj|c:\\users\\admin\\desktop\\projects\\dnc-knightpi-service\\knightpi-service\\knightpi.duckdetection.abstractions\\boundingbox.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{2E2FB654-9C51-4883-AE30-3C5F18EDA22A}|KnightPi.DuckDetection.Abstractions\\KnightPi.DuckDetection.Abstractions.csproj|solutionrelative:knightpi.duckdetection.abstractions\\boundingbox.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{E4D2ED4C-77DC-4DC6-A6F4-FFB414FA435B}|KnightPi.DuckDetection.Api\\KnightPi.DuckDetection.Api.csproj|c:\\users\\admin\\desktop\\projects\\dnc-knightpi-service\\knightpi-service\\knightpi.duckdetection.api\\controllers\\duckdetectioncontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{E4D2ED4C-77DC-4DC6-A6F4-FFB414FA435B}|KnightPi.DuckDetection.Api\\KnightPi.DuckDetection.Api.csproj|solutionrelative:knightpi.duckdetection.api\\controllers\\duckdetectioncontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{E4D2ED4C-77DC-4DC6-A6F4-FFB414FA435B}|KnightPi.DuckDetection.Api\\KnightPi.DuckDetection.Api.csproj|c:\\users\\admin\\desktop\\projects\\dnc-knightpi-service\\knightpi-service\\knightpi.duckdetection.api\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{E4D2ED4C-77DC-4DC6-A6F4-FFB414FA435B}|KnightPi.DuckDetection.Api\\KnightPi.DuckDetection.Api.csproj|solutionrelative:knightpi.duckdetection.api\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -42,104 +62,165 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 1,
+          "SelectedChildIndex": 0,
           "Children": [
-            {
-              "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "DuckDetectorFactory.cs",
-              "DocumentMoniker": "C:\\Users\\danie\\Desktop\\Projects\\KnightPi_Service\\KnightPi.DuckDetection.Core\\DuckDetectorFactory.cs",
-              "RelativeDocumentMoniker": "KnightPi.DuckDetection.Core\\DuckDetectorFactory.cs",
-              "ToolTip": "C:\\Users\\danie\\Desktop\\Projects\\KnightPi_Service\\KnightPi.DuckDetection.Core\\DuckDetectorFactory.cs",
-              "RelativeToolTip": "KnightPi.DuckDetection.Core\\DuckDetectorFactory.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA8AAAAgAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-04-13T19:16:55.782Z"
-            },
             {
               "$type": "Document",
               "DocumentIndex": 0,
               "Title": "CvDuckDetector.cs",
-              "DocumentMoniker": "C:\\Users\\danie\\Desktop\\Projects\\KnightPi_Service\\KnightPi.DuckDetection.Cv\\CvDuckDetector.cs",
+              "DocumentMoniker": "C:\\Users\\admin\\Desktop\\Projects\\DNC-KnightPi-Service\\KnightPi-Service\\KnightPi.DuckDetection.Cv\\CvDuckDetector.cs",
               "RelativeDocumentMoniker": "KnightPi.DuckDetection.Cv\\CvDuckDetector.cs",
-              "ToolTip": "C:\\Users\\danie\\Desktop\\Projects\\KnightPi_Service\\KnightPi.DuckDetection.Cv\\CvDuckDetector.cs",
+              "ToolTip": "C:\\Users\\admin\\Desktop\\Projects\\DNC-KnightPi-Service\\KnightPi-Service\\KnightPi.DuckDetection.Cv\\CvDuckDetector.cs",
               "RelativeToolTip": "KnightPi.DuckDetection.Cv\\CvDuckDetector.cs",
-              "ViewState": "AgIAAA4FAAAAAAAAAAAYwC8FAAAzAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAACoAAAAsAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-04-13T19:16:14.575Z",
+              "WhenOpened": "2026-04-21T11:26:06.873Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "ImageSize.cs",
+              "DocumentMoniker": "C:\\Users\\admin\\Desktop\\Projects\\DNC-KnightPi-Service\\KnightPi-Service\\KnightPi.DuckDetection.Abstractions\\ImageSize.cs",
+              "RelativeDocumentMoniker": "KnightPi.DuckDetection.Abstractions\\ImageSize.cs",
+              "ToolTip": "C:\\Users\\admin\\Desktop\\Projects\\DNC-KnightPi-Service\\KnightPi-Service\\KnightPi.DuckDetection.Abstractions\\ImageSize.cs",
+              "RelativeToolTip": "KnightPi.DuckDetection.Abstractions\\ImageSize.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAYAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-16T22:20:44.332Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 2,
-              "Title": "CvDuckDetectorSettings.cs",
-              "DocumentMoniker": "C:\\Users\\danie\\Desktop\\Projects\\KnightPi_Service\\KnightPi.DuckDetection.Cv\\CvDuckDetectorSettings.cs",
-              "RelativeDocumentMoniker": "KnightPi.DuckDetection.Cv\\CvDuckDetectorSettings.cs",
-              "ToolTip": "C:\\Users\\danie\\Desktop\\Projects\\KnightPi_Service\\KnightPi.DuckDetection.Cv\\CvDuckDetectorSettings.cs",
-              "RelativeToolTip": "KnightPi.DuckDetection.Cv\\CvDuckDetectorSettings.cs",
-              "ViewState": "AgIAAAUAAAAAAAAAAAA1wEQAAAABAAAAAAAAAA==",
+              "Title": "ImagePoint.cs",
+              "DocumentMoniker": "C:\\Users\\admin\\Desktop\\Projects\\DNC-KnightPi-Service\\KnightPi-Service\\KnightPi.DuckDetection.Abstractions\\ImagePoint.cs",
+              "RelativeDocumentMoniker": "KnightPi.DuckDetection.Abstractions\\ImagePoint.cs",
+              "ToolTip": "C:\\Users\\admin\\Desktop\\Projects\\DNC-KnightPi-Service\\KnightPi-Service\\KnightPi.DuckDetection.Abstractions\\ImagePoint.cs",
+              "RelativeToolTip": "KnightPi.DuckDetection.Abstractions\\ImagePoint.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-04-13T19:15:56.484Z"
+              "WhenOpened": "2026-04-16T22:20:23.449Z"
             },
             {
               "$type": "Document",
               "DocumentIndex": 3,
-              "Title": "DuckDetectionResult.cs",
-              "DocumentMoniker": "C:\\Users\\danie\\Desktop\\Projects\\KnightPi_Service\\KnightPi.DuckDetection.Abstractions\\DuckDetectionResult.cs",
-              "RelativeDocumentMoniker": "KnightPi.DuckDetection.Abstractions\\DuckDetectionResult.cs",
-              "ToolTip": "C:\\Users\\danie\\Desktop\\Projects\\KnightPi_Service\\KnightPi.DuckDetection.Abstractions\\DuckDetectionResult.cs",
-              "RelativeToolTip": "KnightPi.DuckDetection.Abstractions\\DuckDetectionResult.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAACgAAAABAAAAAAAAAA==",
+              "Title": "IDuckDetectorFactory.cs",
+              "DocumentMoniker": "C:\\Users\\admin\\Desktop\\Projects\\DNC-KnightPi-Service\\KnightPi-Service\\KnightPi.DuckDetection.Abstractions\\IDuckDetectorFactory.cs",
+              "RelativeDocumentMoniker": "KnightPi.DuckDetection.Abstractions\\IDuckDetectorFactory.cs",
+              "ToolTip": "C:\\Users\\admin\\Desktop\\Projects\\DNC-KnightPi-Service\\KnightPi-Service\\KnightPi.DuckDetection.Abstractions\\IDuckDetectorFactory.cs",
+              "RelativeToolTip": "KnightPi.DuckDetection.Abstractions\\IDuckDetectorFactory.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAUAAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-04-13T19:15:18.092Z"
+              "WhenOpened": "2026-04-16T22:20:02.081Z"
             },
             {
               "$type": "Document",
               "DocumentIndex": 4,
-              "Title": "DropZoneInfo.cs",
-              "DocumentMoniker": "C:\\Users\\danie\\Desktop\\Projects\\KnightPi_Service\\KnightPi.DuckDetection.Abstractions\\DropZoneInfo.cs",
-              "RelativeDocumentMoniker": "KnightPi.DuckDetection.Abstractions\\DropZoneInfo.cs",
-              "ToolTip": "C:\\Users\\danie\\Desktop\\Projects\\KnightPi_Service\\KnightPi.DuckDetection.Abstractions\\DropZoneInfo.cs",
-              "RelativeToolTip": "KnightPi.DuckDetection.Abstractions\\DropZoneInfo.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABYAAAABAAAAAAAAAA==",
+              "Title": "IDuckDetector.cs",
+              "DocumentMoniker": "C:\\Users\\admin\\Desktop\\Projects\\DNC-KnightPi-Service\\KnightPi-Service\\KnightPi.DuckDetection.Abstractions\\IDuckDetector.cs",
+              "RelativeDocumentMoniker": "KnightPi.DuckDetection.Abstractions\\IDuckDetector.cs",
+              "ToolTip": "C:\\Users\\admin\\Desktop\\Projects\\DNC-KnightPi-Service\\KnightPi-Service\\KnightPi.DuckDetection.Abstractions\\IDuckDetector.cs",
+              "RelativeToolTip": "KnightPi.DuckDetection.Abstractions\\IDuckDetector.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAUAAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-04-13T19:14:55.75Z"
+              "WhenOpened": "2026-04-16T22:19:41.955Z"
             },
             {
               "$type": "Document",
               "DocumentIndex": 5,
-              "Title": "BlueBoundaryInfo.cs",
-              "DocumentMoniker": "C:\\Users\\danie\\Desktop\\Projects\\KnightPi_Service\\KnightPi.DuckDetection.Abstractions\\BlueBoundaryInfo.cs",
-              "RelativeDocumentMoniker": "KnightPi.DuckDetection.Abstractions\\BlueBoundaryInfo.cs",
-              "ToolTip": "C:\\Users\\danie\\Desktop\\Projects\\KnightPi_Service\\KnightPi.DuckDetection.Abstractions\\BlueBoundaryInfo.cs",
-              "RelativeToolTip": "KnightPi.DuckDetection.Abstractions\\BlueBoundaryInfo.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABoAAAABAAAAAAAAAA==",
+              "Title": "DuckHorizontalPosition.cs",
+              "DocumentMoniker": "C:\\Users\\admin\\Desktop\\Projects\\DNC-KnightPi-Service\\KnightPi-Service\\KnightPi.DuckDetection.Abstractions\\DuckHorizontalPosition.cs",
+              "RelativeDocumentMoniker": "KnightPi.DuckDetection.Abstractions\\DuckHorizontalPosition.cs",
+              "ToolTip": "C:\\Users\\admin\\Desktop\\Projects\\DNC-KnightPi-Service\\KnightPi-Service\\KnightPi.DuckDetection.Abstractions\\DuckHorizontalPosition.cs",
+              "RelativeToolTip": "KnightPi.DuckDetection.Abstractions\\DuckHorizontalPosition.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-04-13T19:14:28.324Z"
+              "WhenOpened": "2026-04-16T22:17:52.5Z"
             },
             {
               "$type": "Document",
               "DocumentIndex": 6,
-              "Title": "DuckCandidateResult.cs",
-              "DocumentMoniker": "C:\\Users\\danie\\Desktop\\Projects\\KnightPi_Service\\KnightPi.DuckDetection.Abstractions\\DuckCandidateResult.cs",
-              "RelativeDocumentMoniker": "KnightPi.DuckDetection.Abstractions\\DuckCandidateResult.cs",
-              "ToolTip": "C:\\Users\\danie\\Desktop\\Projects\\KnightPi_Service\\KnightPi.DuckDetection.Abstractions\\DuckCandidateResult.cs",
-              "RelativeToolTip": "KnightPi.DuckDetection.Abstractions\\DuckCandidateResult.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABEAAAABAAAAAAAAAA==",
+              "Title": "DuckDetectorKind.cs",
+              "DocumentMoniker": "C:\\Users\\admin\\Desktop\\Projects\\DNC-KnightPi-Service\\KnightPi-Service\\KnightPi.DuckDetection.Abstractions\\DuckDetectorKind.cs",
+              "RelativeDocumentMoniker": "KnightPi.DuckDetection.Abstractions\\DuckDetectorKind.cs",
+              "ToolTip": "C:\\Users\\admin\\Desktop\\Projects\\DNC-KnightPi-Service\\KnightPi-Service\\KnightPi.DuckDetection.Abstractions\\DuckDetectorKind.cs",
+              "RelativeToolTip": "KnightPi.DuckDetection.Abstractions\\DuckDetectorKind.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAYAAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-04-13T19:13:49Z"
+              "WhenOpened": "2026-04-16T22:17:34.484Z"
             },
             {
               "$type": "Document",
               "DocumentIndex": 7,
-              "Title": "ImagePoint.cs",
-              "DocumentMoniker": "C:\\Users\\danie\\Desktop\\Projects\\KnightPi_Service\\KnightPi.DuckDetection.Abstractions\\ImagePoint.cs",
-              "RelativeDocumentMoniker": "KnightPi.DuckDetection.Abstractions\\ImagePoint.cs",
-              "ToolTip": "C:\\Users\\danie\\Desktop\\Projects\\KnightPi_Service\\KnightPi.DuckDetection.Abstractions\\ImagePoint.cs",
-              "RelativeToolTip": "KnightPi.DuckDetection.Abstractions\\ImagePoint.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAAABAAAAAAAAAA==",
+              "Title": "DuckDetectionResult.cs",
+              "DocumentMoniker": "C:\\Users\\admin\\Desktop\\Projects\\DNC-KnightPi-Service\\KnightPi-Service\\KnightPi.DuckDetection.Abstractions\\DuckDetectionResult.cs",
+              "RelativeDocumentMoniker": "KnightPi.DuckDetection.Abstractions\\DuckDetectionResult.cs",
+              "ToolTip": "C:\\Users\\admin\\Desktop\\Projects\\DNC-KnightPi-Service\\KnightPi-Service\\KnightPi.DuckDetection.Abstractions\\DuckDetectionResult.cs",
+              "RelativeToolTip": "KnightPi.DuckDetection.Abstractions\\DuckDetectionResult.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAACgAAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-04-13T19:13:03.366Z"
+              "WhenOpened": "2026-04-16T22:17:11.872Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "DuckDetectionRequest.cs",
+              "DocumentMoniker": "C:\\Users\\admin\\Desktop\\Projects\\DNC-KnightPi-Service\\KnightPi-Service\\KnightPi.DuckDetection.Abstractions\\DuckDetectionRequest.cs",
+              "RelativeDocumentMoniker": "KnightPi.DuckDetection.Abstractions\\DuckDetectionRequest.cs",
+              "ToolTip": "C:\\Users\\admin\\Desktop\\Projects\\DNC-KnightPi-Service\\KnightPi-Service\\KnightPi.DuckDetection.Abstractions\\DuckDetectionRequest.cs",
+              "RelativeToolTip": "KnightPi.DuckDetection.Abstractions\\DuckDetectionRequest.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-16T22:16:47.01Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "DuckCandidateResult.cs",
+              "DocumentMoniker": "C:\\Users\\admin\\Desktop\\Projects\\DNC-KnightPi-Service\\KnightPi-Service\\KnightPi.DuckDetection.Abstractions\\DuckCandidateResult.cs",
+              "RelativeDocumentMoniker": "KnightPi.DuckDetection.Abstractions\\DuckCandidateResult.cs",
+              "ToolTip": "C:\\Users\\admin\\Desktop\\Projects\\DNC-KnightPi-Service\\KnightPi-Service\\KnightPi.DuckDetection.Abstractions\\DuckCandidateResult.cs",
+              "RelativeToolTip": "KnightPi.DuckDetection.Abstractions\\DuckCandidateResult.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABEAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-16T22:16:10.717Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
+              "Title": "BoundingBox.cs",
+              "DocumentMoniker": "C:\\Users\\admin\\Desktop\\Projects\\DNC-KnightPi-Service\\KnightPi-Service\\KnightPi.DuckDetection.Abstractions\\BoundingBox.cs",
+              "RelativeDocumentMoniker": "KnightPi.DuckDetection.Abstractions\\BoundingBox.cs",
+              "ToolTip": "C:\\Users\\admin\\Desktop\\Projects\\DNC-KnightPi-Service\\KnightPi-Service\\KnightPi.DuckDetection.Abstractions\\BoundingBox.cs",
+              "RelativeToolTip": "KnightPi.DuckDetection.Abstractions\\BoundingBox.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-16T22:15:19.669Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 11,
+              "Title": "DuckDetectionController.cs",
+              "DocumentMoniker": "C:\\Users\\admin\\Desktop\\Projects\\DNC-KnightPi-Service\\KnightPi-Service\\KnightPi.DuckDetection.Api\\Controllers\\DuckDetectionController.cs",
+              "RelativeDocumentMoniker": "KnightPi.DuckDetection.Api\\Controllers\\DuckDetectionController.cs",
+              "ToolTip": "C:\\Users\\admin\\Desktop\\Projects\\DNC-KnightPi-Service\\KnightPi-Service\\KnightPi.DuckDetection.Api\\Controllers\\DuckDetectionController.cs",
+              "RelativeToolTip": "KnightPi.DuckDetection.Api\\Controllers\\DuckDetectionController.cs",
+              "ViewState": "AgIAACcAAAAAAAAAAAAwwJQAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-16T22:07:51.004Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 12,
+              "Title": "Program.cs",
+              "DocumentMoniker": "C:\\Users\\admin\\Desktop\\Projects\\DNC-KnightPi-Service\\KnightPi-Service\\KnightPi.DuckDetection.Api\\Program.cs",
+              "RelativeDocumentMoniker": "KnightPi.DuckDetection.Api\\Program.cs",
+              "ToolTip": "C:\\Users\\admin\\Desktop\\Projects\\DNC-KnightPi-Service\\KnightPi-Service\\KnightPi.DuckDetection.Api\\Program.cs",
+              "RelativeToolTip": "KnightPi.DuckDetection.Api\\Program.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-16T22:07:09.545Z"
             }
           ]
         }

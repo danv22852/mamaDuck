@@ -10,14 +10,12 @@ public:
     Command parse(const String& rawCommand) const;
 
 private:
-    CommandType parseCommandType(String cmd) const;
     bool parseJsonEnvelope(const String& rawCommand, Command& command) const;
-    bool parsePickObjectCommand(const String& rawCommand, Command& command) const;
-    bool parseTimedMoveCommand(const String& rawCommand, Command& command) const;
-    bool parseUsScanCommand(const String& rawCommand, Command& command) const;
 
     ArmMotionMode parseArmMotionMode(const String& text) const;
     ArmServoId parseServoId(const String& text) const;
+    CancelTarget parseCancelTarget(const String& text) const;
+    void copyText(char* dest, size_t destSize, const char* src) const;
 };
 
 #endif

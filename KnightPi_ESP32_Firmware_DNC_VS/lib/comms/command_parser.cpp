@@ -1,47 +1,12 @@
 #include <ArduinoJson.h>
 #include "command_parser.h"
 
-Command CommandParser::parse(const String& rawCommand) const
+void CommandParser::copyText(char* dest, size_t destSize, const char* src) const
 {
-    Command command;
-    command.originalText = rawCommand;
-
-    String trimmedCommand = rawCommand;
-    trimmedCommand.trim();
-
-    if (parseJsonEnvelope(trimmedCommand, command)) return command;
-
-    if (parsePickObjectCommand(trimmedCommand, command)) return command;
-    if (parseTimedMoveCommand(trimmedCommand, command)) return command;
-    if (parseUsScanCommand(trimmedCommand, command)) return command;
-
-    command.type = parseCommandType(trimmedCommand);
-    return command;
-}
-
-CommandType CommandParser::parseCommandType(String cmd) const
-{
-    cmd.trim();
-    cmd.toUpperCase();
-
-    if (cmd == "PING") return CMD_PING;
-    else if (cmd == "LED_ON") return CMD_LED_ON;
-    else if (cmd == "LED_OFF") return CMD_LED_OFF;
-    else if (cmd == "BLINK") return CMD_BLINK;
-    else if (cmd == "MOVE_FW") return CMD_MOVE_FW;
-    else if (cmd == "MOVE_BW") return CMD_MOVE_BW;
-    else if (cmd == "MOVE_LEFT") return CMD_MOVE_LEFT;
-    else if (cmd == "MOVE_RIGHT") return CMD_MOVE_RIGHT;
-    else if (cmd == "ROTATE_CW") return CMD_ROTATE_CW;
-    else if (cmd == "ROTATE_CCW") return CMD_ROTATE_CCW;
-    else if (cmd == "STOP") return CMD_STOP;
-    else if (cmd == "US_TEST") return CMD_US_TEST;
-    else if (cmd == "US_SCAN") return CMD_US_SCAN;
-    else if (cmd == "PICK_ANGLES") return CMD_PICK_ANGLES;
-    else if (cmd == "DROP_ANGLES") return CMD_DROP_ANGLES;
-    else if (cmd == "MOVE_ARM_ANGLES") return CMD_MOVE_ARM_ANGLES;
-
-    return CMD_UNKNOWN;
+    if (destSize == 0) return;
+    if (src == nullptr) src = "";
+    strncpy(dest, src, destSize - 1);
+    dest[destSize - 1] = '\0';
 }
 
 ArmMotionMode CommandParser::parseArmMotionMode(const String& text) const
@@ -67,6 +32,32 @@ ArmServoId CommandParser::parseServoId(const String& text) const
     return ARM_SERVO_CLAW;
 }
 
+CancelTarget CommandParser::parseCancelTarget(const String& text) const
+{
+    String value = text;
+    value.trim();
+    value.toUpperCase();
+
+    if (value == "DRIVE") return CANCEL_TARGET_DRIVE;
+    if (value == "ARM") return CANCEL_TARGET_ARM;
+    return CANCEL_TARGET_ALL;
+}
+
+Command CommandParser::parse(const String& rawCommand) const
+{
+    Command command;
+
+    String trimmedCommand = rawCommand;
+    trimmedCommand.trim();
+
+    if (parseJsonEnvelope(trimmedCommand, command))
+    {
+        return command;
+    }
+
+    return command;
+}
+
 bool CommandParser::parseJsonEnvelope(const String& rawCommand, Command& command) const
 {
     if (rawCommand.length() == 0) return false;
@@ -74,14 +65,15 @@ bool CommandParser::parseJsonEnvelope(const String& rawCommand, Command& command
 
     JsonDocument doc;
     DeserializationError err = deserializeJson(doc, rawCommand);
+
     if (err)
     {
-        command.type = CMD_UNKNOWN;
-        return true;
+        return false;
     }
 
     command.expectsJsonResponse = true;
-    command.transactionId = doc["transactionId"] | "";
+    copyText(command.transactionId, sizeof(command.transactionId), doc["transactionId"] | "");
+
     String cmd = doc["command"] | "";
     cmd.toUpperCase();
 
@@ -90,9 +82,31 @@ bool CommandParser::parseJsonEnvelope(const String& rawCommand, Command& command
         command.type = CMD_PING;
         return true;
     }
-    else if (cmd == "US_TEST")
+    else if (cmd == "STATUS")
     {
-        command.type = CMD_US_TEST;
+        command.type = CMD_STATUS;
+        return true;
+    }
+    else if (cmd == "CANCEL")
+    {
+        command.type = CMD_CANCEL;
+        command.cancelTarget = parseCancelTarget((const char*)(doc["args"]["target"] | "ALL"));
+        return true;
+    }
+    else if (cmd == "STOP")
+    {
+        command.type = CMD_STOP;
+        return true;
+    }
+    else if (cmd == "US_MONITOR_ON")
+    {
+        command.type = CMD_US_MONITOR_ON;
+        command.usMonitorAlarmDistanceMm = doc["args"]["alarmDistanceMm"] | DEFAULT_US_MONITOR_ALARM_DISTANCE_MM;
+        return true;
+    }
+    else if (cmd == "US_MONITOR_OFF")
+    {
+        command.type = CMD_US_MONITOR_OFF;
         return true;
     }
     else if (cmd == "US_SCAN")
@@ -106,12 +120,32 @@ bool CommandParser::parseJsonEnvelope(const String& rawCommand, Command& command
         String rotation = doc["args"]["rotation"] | "CCW";
         rotation.toUpperCase();
         command.usScanRotation = (rotation == "CW") ? SCAN_CW : SCAN_CCW;
-
         return true;
     }
     else if (cmd == "MOVE_FW")
     {
         command.type = CMD_MOVE_FW;
+        command.moveAmountMs = doc["args"]["durationMs"] | 300;
+        command.moveSpeed = doc["args"]["speed"] | 50;
+        return true;
+    }
+    else if (cmd == "MOVE_BW")
+    {
+        command.type = CMD_MOVE_BW;
+        command.moveAmountMs = doc["args"]["durationMs"] | 300;
+        command.moveSpeed = doc["args"]["speed"] | 50;
+        return true;
+    }
+    else if (cmd == "MOVE_LEFT")
+    {
+        command.type = CMD_MOVE_LEFT;
+        command.moveAmountMs = doc["args"]["durationMs"] | 300;
+        command.moveSpeed = doc["args"]["speed"] | 50;
+        return true;
+    }
+    else if (cmd == "MOVE_RIGHT")
+    {
+        command.type = CMD_MOVE_RIGHT;
         command.moveAmountMs = doc["args"]["durationMs"] | 300;
         command.moveSpeed = doc["args"]["speed"] | 50;
         return true;
@@ -123,9 +157,16 @@ bool CommandParser::parseJsonEnvelope(const String& rawCommand, Command& command
         command.moveSpeed = doc["args"]["speed"] | 50;
         return true;
     }
-    else if (cmd == "PICK_ANGLES")
+    else if (cmd == "ROTATE_CCW")
     {
-        command.type = CMD_PICK_ANGLES;
+        command.type = CMD_ROTATE_CCW;
+        command.moveAmountMs = doc["args"]["durationMs"] | 300;
+        command.moveSpeed = doc["args"]["speed"] | 50;
+        return true;
+    }
+    else if (cmd == "PICK_ANGLES_SPEED")
+    {
+        command.type = CMD_PICK_ANGLES_SPEED;
 
         JsonObject pickupPose = doc["args"]["pickupPose"];
         command.armPickupChassisAngleDeg = pickupPose["chassisAngleDeg"] | 0.0f;
@@ -141,12 +182,19 @@ bool CommandParser::parseJsonEnvelope(const String& rawCommand, Command& command
         command.armLiftElbowAngleDeg = liftPose["elbowAngleDeg"] | 0.0f;
         command.armLiftWristAngleDeg = liftPose["wristAngleDeg"] | 0.0f;
 
-        JsonObject stepDelay = doc["args"]["stepDelayMs"];
-        command.armStepDelay.chassisMs = stepDelay["chassis"] | 15;
-        command.armStepDelay.shoulderMs = stepDelay["shoulder"] | 15;
-        command.armStepDelay.elbowMs = stepDelay["elbow"] | 15;
-        command.armStepDelay.wristMs = stepDelay["wrist"] | 15;
-        command.armStepDelay.clawMs = stepDelay["claw"] | 15;
+        JsonObject pickupSpeed = doc["args"]["pickupSpeedPercent"];
+        command.armPickupSpeed.chassisPercent = pickupSpeed["chassis"] | 50;
+        command.armPickupSpeed.shoulderPercent = pickupSpeed["shoulder"] | 50;
+        command.armPickupSpeed.elbowPercent = pickupSpeed["elbow"] | 50;
+        command.armPickupSpeed.wristPercent = pickupSpeed["wrist"] | 50;
+        command.armPickupSpeed.clawPercent = pickupSpeed["claw"] | 50;
+
+        JsonObject liftSpeed = doc["args"]["liftSpeedPercent"];
+        command.armLiftSpeed.chassisPercent = liftSpeed["chassis"] | 50;
+        command.armLiftSpeed.shoulderPercent = liftSpeed["shoulder"] | 50;
+        command.armLiftSpeed.elbowPercent = liftSpeed["elbow"] | 50;
+        command.armLiftSpeed.wristPercent = liftSpeed["wrist"] | 50;
+        command.armLiftSpeed.clawPercent = liftSpeed["claw"] | 50;
 
         command.armPickupMotionMode = parseArmMotionMode((const char*)(doc["args"]["pickupMotionMode"] | "ORDERED"));
         command.armLiftMotionMode = parseArmMotionMode((const char*)(doc["args"]["liftMotionMode"] | "ORDERED"));
@@ -159,16 +207,6 @@ bool CommandParser::parseJsonEnvelope(const String& rawCommand, Command& command
             command.armPickupServoOrder[command.armPickupServoOrderCount++] = parseServoId(v.as<String>());
         }
 
-        if (command.armPickupServoOrderCount == 0)
-        {
-            command.armPickupServoOrderCount = 5;
-            command.armPickupServoOrder[0] = ARM_SERVO_CLAW;
-            command.armPickupServoOrder[1] = ARM_SERVO_CHASSIS;
-            command.armPickupServoOrder[2] = ARM_SERVO_SHOULDER;
-            command.armPickupServoOrder[3] = ARM_SERVO_ELBOW;
-            command.armPickupServoOrder[4] = ARM_SERVO_WRIST;
-        }
-
         command.armLiftServoOrderCount = 0;
         JsonArray liftOrder = doc["args"]["liftServoOrder"].as<JsonArray>();
         for (JsonVariant v : liftOrder)
@@ -177,20 +215,11 @@ bool CommandParser::parseJsonEnvelope(const String& rawCommand, Command& command
             command.armLiftServoOrder[command.armLiftServoOrderCount++] = parseServoId(v.as<String>());
         }
 
-        if (command.armLiftServoOrderCount == 0)
-        {
-            command.armLiftServoOrderCount = 4;
-            command.armLiftServoOrder[0] = ARM_SERVO_SHOULDER;
-            command.armLiftServoOrder[1] = ARM_SERVO_ELBOW;
-            command.armLiftServoOrder[2] = ARM_SERVO_WRIST;
-            command.armLiftServoOrder[3] = ARM_SERVO_CHASSIS;
-        }
-
         return true;
     }
-    else if (cmd == "DROP_ANGLES")
+    else if (cmd == "DROP_ANGLES_SPEED")
     {
-        command.type = CMD_DROP_ANGLES;
+        command.type = CMD_DROP_ANGLES_SPEED;
 
         JsonObject dropPose = doc["args"]["dropPose"];
         command.armDropChassisAngleDeg = dropPose["chassisAngleDeg"] | 0.0f;
@@ -205,12 +234,19 @@ bool CommandParser::parseJsonEnvelope(const String& rawCommand, Command& command
         command.armRetreatElbowAngleDeg = retreatPose["elbowAngleDeg"] | 0.0f;
         command.armRetreatWristAngleDeg = retreatPose["wristAngleDeg"] | 0.0f;
 
-        JsonObject stepDelay = doc["args"]["stepDelayMs"];
-        command.armStepDelay.chassisMs = stepDelay["chassis"] | 15;
-        command.armStepDelay.shoulderMs = stepDelay["shoulder"] | 15;
-        command.armStepDelay.elbowMs = stepDelay["elbow"] | 15;
-        command.armStepDelay.wristMs = stepDelay["wrist"] | 15;
-        command.armStepDelay.clawMs = stepDelay["claw"] | 15;
+        JsonObject dropSpeed = doc["args"]["dropSpeedPercent"];
+        command.armDropSpeed.chassisPercent = dropSpeed["chassis"] | 50;
+        command.armDropSpeed.shoulderPercent = dropSpeed["shoulder"] | 50;
+        command.armDropSpeed.elbowPercent = dropSpeed["elbow"] | 50;
+        command.armDropSpeed.wristPercent = dropSpeed["wrist"] | 50;
+        command.armDropSpeed.clawPercent = dropSpeed["claw"] | 50;
+
+        JsonObject retreatSpeed = doc["args"]["retreatSpeedPercent"];
+        command.armRetreatSpeed.chassisPercent = retreatSpeed["chassis"] | 50;
+        command.armRetreatSpeed.shoulderPercent = retreatSpeed["shoulder"] | 50;
+        command.armRetreatSpeed.elbowPercent = retreatSpeed["elbow"] | 50;
+        command.armRetreatSpeed.wristPercent = retreatSpeed["wrist"] | 50;
+        command.armRetreatSpeed.clawPercent = retreatSpeed["claw"] | 50;
 
         command.armDropMotionMode = parseArmMotionMode((const char*)(doc["args"]["dropMotionMode"] | "ORDERED"));
         command.armRetreatMotionMode = parseArmMotionMode((const char*)(doc["args"]["retreatMotionMode"] | "ORDERED"));
@@ -223,15 +259,6 @@ bool CommandParser::parseJsonEnvelope(const String& rawCommand, Command& command
             command.armDropServoOrder[command.armDropServoOrderCount++] = parseServoId(v.as<String>());
         }
 
-        if (command.armDropServoOrderCount == 0)
-        {
-            command.armDropServoOrderCount = 4;
-            command.armDropServoOrder[0] = ARM_SERVO_CHASSIS;
-            command.armDropServoOrder[1] = ARM_SERVO_SHOULDER;
-            command.armDropServoOrder[2] = ARM_SERVO_ELBOW;
-            command.armDropServoOrder[3] = ARM_SERVO_WRIST;
-        }
-
         command.armRetreatServoOrderCount = 0;
         JsonArray retreatOrder = doc["args"]["retreatServoOrder"].as<JsonArray>();
         for (JsonVariant v : retreatOrder)
@@ -240,20 +267,11 @@ bool CommandParser::parseJsonEnvelope(const String& rawCommand, Command& command
             command.armRetreatServoOrder[command.armRetreatServoOrderCount++] = parseServoId(v.as<String>());
         }
 
-        if (command.armRetreatServoOrderCount == 0)
-        {
-            command.armRetreatServoOrderCount = 4;
-            command.armRetreatServoOrder[0] = ARM_SERVO_SHOULDER;
-            command.armRetreatServoOrder[1] = ARM_SERVO_ELBOW;
-            command.armRetreatServoOrder[2] = ARM_SERVO_WRIST;
-            command.armRetreatServoOrder[3] = ARM_SERVO_CHASSIS;
-        }
-
         return true;
     }
-    else if (cmd == "MOVE_ARM_ANGLES")
+    else if (cmd == "MOVE_ARM_ANGLES_SPEED")
     {
-        command.type = CMD_MOVE_ARM_ANGLES;
+        command.type = CMD_MOVE_ARM_ANGLES_SPEED;
 
         JsonObject pose = doc["args"]["pose"];
         command.armMoveChassisAngleDeg = pose["chassisAngleDeg"] | 0.0f;
@@ -262,12 +280,12 @@ bool CommandParser::parseJsonEnvelope(const String& rawCommand, Command& command
         command.armMoveWristAngleDeg = pose["wristAngleDeg"] | 0.0f;
         command.armMoveClawAngleDeg = pose["clawAngleDeg"] | 0.0f;
 
-        JsonObject stepDelay = doc["args"]["stepDelayMs"];
-        command.armStepDelay.chassisMs = stepDelay["chassis"] | 15;
-        command.armStepDelay.shoulderMs = stepDelay["shoulder"] | 15;
-        command.armStepDelay.elbowMs = stepDelay["elbow"] | 15;
-        command.armStepDelay.wristMs = stepDelay["wrist"] | 15;
-        command.armStepDelay.clawMs = stepDelay["claw"] | 15;
+        JsonObject speedPercent = doc["args"]["speedPercent"];
+        command.armMoveSpeed.chassisPercent = speedPercent["chassis"] | 50;
+        command.armMoveSpeed.shoulderPercent = speedPercent["shoulder"] | 50;
+        command.armMoveSpeed.elbowPercent = speedPercent["elbow"] | 50;
+        command.armMoveSpeed.wristPercent = speedPercent["wrist"] | 50;
+        command.armMoveSpeed.clawPercent = speedPercent["claw"] | 50;
 
         command.armMoveMotionMode = parseArmMotionMode((const char*)(doc["args"]["motionMode"] | "ORDERED"));
 
@@ -279,144 +297,9 @@ bool CommandParser::parseJsonEnvelope(const String& rawCommand, Command& command
             command.armMoveServoOrder[command.armMoveServoOrderCount++] = parseServoId(v.as<String>());
         }
 
-        if (command.armMoveServoOrderCount == 0)
-        {
-            command.armMoveServoOrderCount = 5;
-            command.armMoveServoOrder[0] = ARM_SERVO_CHASSIS;
-            command.armMoveServoOrder[1] = ARM_SERVO_SHOULDER;
-            command.armMoveServoOrder[2] = ARM_SERVO_ELBOW;
-            command.armMoveServoOrder[3] = ARM_SERVO_WRIST;
-            command.armMoveServoOrder[4] = ARM_SERVO_CLAW;
-        }
-
         return true;
     }
 
     command.type = CMD_UNKNOWN;
     return true;
-}
-
-bool CommandParser::parsePickObjectCommand(const String& rawCommand, Command& command) const
-{
-    float angleDeg = 0.0f;
-    float distanceMm = 0.0f;
-    float heightMm = 0.0f;
-
-    int parsed = sscanf(
-        rawCommand.c_str(),
-        "PICK_OBJECT %f %f %f",
-        &angleDeg,
-        &distanceMm,
-        &heightMm
-    );
-
-    if (parsed == 3)
-    {
-        command.type = CMD_PICK_OBJECT;
-        command.pickAngleDeg = angleDeg;
-        command.pickDistanceMm = distanceMm;
-        command.pickHeightMm = heightMm;
-        return true;
-    }
-
-    return false;
-}
-
-bool CommandParser::parseTimedMoveCommand(const String& rawCommand, Command& command) const
-{
-    int amountMs = 0;
-    int speed = 50;
-
-    if (sscanf(rawCommand.c_str(), "MOVE_FW %d %d", &amountMs, &speed) >= 1)
-    {
-        command.type = CMD_MOVE_FW;
-        command.moveAmountMs = amountMs;
-        command.moveSpeed = speed;
-        return true;
-    }
-    else if (sscanf(rawCommand.c_str(), "MOVE_BW %d %d", &amountMs, &speed) >= 1)
-    {
-        command.type = CMD_MOVE_BW;
-        command.moveAmountMs = amountMs;
-        command.moveSpeed = speed;
-        return true;
-    }
-    else if (sscanf(rawCommand.c_str(), "MOVE_LEFT %d %d", &amountMs, &speed) >= 1)
-    {
-        command.type = CMD_MOVE_LEFT;
-        command.moveAmountMs = amountMs;
-        command.moveSpeed = speed;
-        return true;
-    }
-    else if (sscanf(rawCommand.c_str(), "MOVE_RIGHT %d %d", &amountMs, &speed) >= 1)
-    {
-        command.type = CMD_MOVE_RIGHT;
-        command.moveAmountMs = amountMs;
-        command.moveSpeed = speed;
-        return true;
-    }
-    else if (sscanf(rawCommand.c_str(), "ROTATE_CW %d %d", &amountMs, &speed) >= 1)
-    {
-        command.type = CMD_ROTATE_CW;
-        command.moveAmountMs = amountMs;
-        command.moveSpeed = speed;
-        return true;
-    }
-    else if (sscanf(rawCommand.c_str(), "ROTATE_CCW %d %d", &amountMs, &speed) >= 1)
-    {
-        command.type = CMD_ROTATE_CCW;
-        command.moveAmountMs = amountMs;
-        command.moveSpeed = speed;
-        return true;
-    }
-
-    return false;
-}
-
-bool CommandParser::parseUsScanCommand(const String& rawCommand, Command& command) const
-{
-    float scanAngleDeg = 0.0f;
-    int steps = 0;
-    unsigned long stepRotateMs = 0;
-    int rotateSpeed = 0;
-    char rotationText[8] = {0};
-
-    int parsed = sscanf(
-        rawCommand.c_str(),
-        "US_SCAN %f %d %lu %d %7s",
-        &scanAngleDeg,
-        &steps,
-        &stepRotateMs,
-        &rotateSpeed,
-        rotationText
-    );
-
-    if (parsed >= 4)
-    {
-        command.type = CMD_US_SCAN;
-        command.usScanAngleDeg = scanAngleDeg;
-        command.usScanSteps = steps;
-        command.usScanStepRotateMs = stepRotateMs;
-        command.usScanRotateSpeed = rotateSpeed;
-        command.usScanRotation = SCAN_CCW;
-
-        if (parsed == 5)
-        {
-            String dir = String(rotationText);
-            dir.toUpperCase();
-
-            if (dir == "CW")
-            {
-                command.usScanRotation = SCAN_CW;
-            }
-            else
-            {
-                command.usScanRotation = SCAN_CCW;
-            }
-        }
-
-        return true;
-    }
-
-    return false;
 }

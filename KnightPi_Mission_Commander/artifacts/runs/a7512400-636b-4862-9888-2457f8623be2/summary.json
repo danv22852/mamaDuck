@@ -1,0 +1,113 @@
+{
+  "runId": "a7512400-636b-4862-9888-2457f8623be2",
+  "runKind": "mission",
+  "runName": "duck_pick_and_drop_cycle",
+  "startedAtUtc": "2026-04-17T00:32:32.378414+00:00",
+  "parameters": {
+    "dry_run_no_motion": true,
+    "search_target_timeout_seconds": 60.0,
+    "approach_target_timeout_seconds": 60.0,
+    "pickup_target_timeout_seconds": 45.0,
+    "search_drop_zone_timeout_seconds": 60.0,
+    "move_to_drop_zone_timeout_seconds": 60.0,
+    "drop_target_timeout_seconds": 45.0,
+    "search_scan_angle_deg": 360.0,
+    "search_scan_steps": 48,
+    "search_scan_rotate_speed": 255,
+    "search_scan_step_rotate_ms": 200,
+    "search_scan_rotation": "CCW",
+    "rotation_speed": 255,
+    "rotate_ms_per_degree": 8.0,
+    "center_tolerance_percent": 8.0,
+    "forward_speed": 255,
+    "backward_speed": 255,
+    "forward_ms_per_mm": 2.0,
+    "backward_ms_per_mm": 2.0,
+    "arm_pickup_distance_mm": 120.0,
+    "pickup_distance_margin_mm": 50.0,
+    "distance_tolerance_mm": 20.0,
+    "pickup_verify_distance_delta_mm": 30.0,
+    "pickup_recovery_backoff_mm": 50.0,
+    "drop_search_step_angle_deg": 15.0,
+    "drop_search_rotation_speed": 255,
+    "drop_search_step_rotate_ms": 150,
+    "drop_zone_center_tolerance_percent": 8.0,
+    "drop_zone_bottom_target_percent": 20.0,
+    "detector_kind": "cv",
+    "save_debug_image": true,
+    "pickup_args": {
+      "pickupPose": {
+        "chassisAngleDeg": 88,
+        "shoulderAngleDeg": 70,
+        "elbowAngleDeg": 95,
+        "wristAngleDeg": 95,
+        "openClawAngleDeg": 150,
+        "closeClawAngleDeg": 90
+      },
+      "liftPose": {
+        "chassisAngleDeg": 88,
+        "shoulderAngleDeg": 45,
+        "elbowAngleDeg": 70,
+        "wristAngleDeg": 95
+      },
+      "stepDelayMs": {
+        "chassis": 15,
+        "shoulder": 15,
+        "elbow": 15,
+        "wrist": 15,
+        "claw": 15
+      },
+      "pickupMotionMode": "ORDERED",
+      "liftMotionMode": "ORDERED",
+      "pickupServoOrder": [
+        "CLAW",
+        "CHASSIS",
+        "SHOULDER",
+        "ELBOW",
+        "WRIST"
+      ],
+      "liftServoOrder": [
+        "SHOULDER",
+        "ELBOW",
+        "WRIST",
+        "CHASSIS"
+      ]
+    },
+    "drop_args": {
+      "dropPose": {
+        "chassisAngleDeg": 88,
+        "shoulderAngleDeg": 70,
+        "elbowAngleDeg": 95,
+        "wristAngleDeg": 95,
+        "openClawAngleDeg": 150
+      },
+      "retreatPose": {
+        "chassisAngleDeg": 88,
+        "shoulderAngleDeg": 45,
+        "elbowAngleDeg": 70,
+        "wristAngleDeg": 95
+      },
+      "stepDelayMs": {
+        "chassis": 15,
+        "shoulder": 15,
+        "elbow": 15,
+        "wrist": 15,
+        "claw": 15
+      },
+      "dropMotionMode": "ORDERED",
+      "retreatMotionMode": "ORDERED",
+      "dropServoOrder": [
+        "CHASSIS",
+        "SHOULDER",
+        "ELBOW",
+        "WRIST"
+      ],
+      "retreatServoOrder": [
+        "SHOULDER",
+        "ELBOW",
+        "WRIST",
+        "CHASSIS"
+      ]
+    }
+  }
+}
