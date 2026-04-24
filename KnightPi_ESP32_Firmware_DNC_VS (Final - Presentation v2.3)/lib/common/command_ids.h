@@ -1,0 +1,36 @@
+#ifndef COMMAND_IDS_H
+#define COMMAND_IDS_H
+
+enum CommandType
+{
+    CMD_UNKNOWN = 0,
+
+    CMD_PING,
+    CMD_STATUS,
+    CMD_CANCEL,
+
+    CMD_MOVE_FW,
+    CMD_MOVE_BW,
+    CMD_MOVE_LEFT,
+    CMD_MOVE_RIGHT,
+    CMD_ROTATE_CW,
+    CMD_ROTATE_CCW,
+    CMD_STOP,
+
+    CMD_US_SCAN,
+    CMD_US_MONITOR_ON,
+    CMD_US_MONITOR_OFF,
+
+    CMD_PICK_ANGLES_SPEED,
+    CMD_DROP_ANGLES_SPEED,
+    CMD_MOVE_ARM_ANGLES_SPEED
+};
+
+enum CancelTarget
+{
+    CANCEL_TARGET_ALL = 0,
+    CANCEL_TARGET_DRIVE,
+    CANCEL_TARGET_ARM
+};
+
+#endif
