@@ -1,7 +1,0 @@
-fastapi
-uvicorn[standard]
-httpx
-pyserial
-pydantic
-pydantic-settings
-aiofiles
